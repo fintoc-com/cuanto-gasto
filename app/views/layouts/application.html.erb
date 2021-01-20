@@ -3,13 +3,24 @@
   <head>
     <title>CuantoGasto</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= stylesheet_pack_tag 'application' %>
+    <script>
+      const RAILS_API_URL = "<%= ENV.fetch('RAILS_API_URL') %>";
+      const WIDGET_WEBHOOK_HOST = "<%= ENV.fetch('WIDGET_WEBHOOK_HOST') %>";
+    </script>
   </head>
 
   <body>
-    <%= yield %>
+    <div id="vue-app">
+      <app></app>
+      <%= yield %>
+    </div>
   </body>
 </html>

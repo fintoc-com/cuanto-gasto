@@ -83,3 +83,18 @@ For managing tasks in the background, this project uses [Sidekiq](https://github
 To populate your database with initial data you can add, inside the `/db/seeds.rb` file, the code to generate **only the necessary data** to run the application.
 If you need to generate data with **development purposes**, you can customize the `lib/fake_data_loader.rb` module and then to run the `rake load_fake_data` task from your terminal.
 
+
+## Development
+
+For hot-reloading and fast webpacker compilation you need to run webpack's dev server along with the rails server:
+
+    $ ./bin/webpack-dev-server
+
+Running the dev server will also solve problems with the cache not refreshing between changes and provide better error messages if something fails to compile.
+
+For even faster in-place component refreshing (with no page reloads), you can enable Hot Module Reloading in `config/webpacker.yml`
+
+    development:
+      dev_server:
+        hmr: true
+

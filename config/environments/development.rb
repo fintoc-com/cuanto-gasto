@@ -25,4 +25,5 @@ Rails.application.configure do
   config.assets.debug = true
   config.assets.quiet = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.hosts << "fae4b0df1b71.ngrok.io"
 end
