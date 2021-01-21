@@ -35,7 +35,6 @@ export default {
 
   created() {
     this.fetchSession();
-    console.log(RAILS_API_URL);
   },
 
   methods: {
@@ -49,7 +48,7 @@ export default {
     },
 
     async fetchSession() {
-      const resp = await axios.post('http://localhost:3000/api/v1/session');
+      const resp = await axios.post(`${RAILS_API_URL}/api/v1/session`);
       this.session = resp.data.session;
     },
 
@@ -58,7 +57,7 @@ export default {
     },
 
     resultsPolling() {
-      axios.get(`http://localhost:3000/api/v1/fintoc/${this.session}`)
+      axios.get(`${RAILS_API_URL}/api/v1/fintoc/${this.session}`)
         .then((resp) => {
             if (resp.data.status === 'completed') {
               this.results = resp.data;
