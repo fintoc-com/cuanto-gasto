@@ -38,8 +38,7 @@ class Api::V1::FintocController < Api::V1::BaseController
   def calculate_expenses
     rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
                          .map(&:amount)
-                         .sum * 730 / 100
-            .to_i
+                         .sum
     uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
                              .map(&:amount)
                              .sum * 730 / 100
@@ -55,6 +54,7 @@ class Api::V1::FintocController < Api::V1::BaseController
     rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
                          .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
                          .sum
+                         .to_i
     uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
                              .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
                              .sum * 730 / 100
