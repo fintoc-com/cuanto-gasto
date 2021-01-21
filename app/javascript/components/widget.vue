@@ -31,7 +31,7 @@ export default {
       const widget = document.getElementById('fintocWidget');
       const url = new URL(widget.contentWindow.location.href);
 
-      if (!url.href.includes('widget-flow-completed')) return;
+      if (!url.href.includes('widget-completed-flow')) return;
 
       const result = url.searchParams.get('result');
       console.log(result);
