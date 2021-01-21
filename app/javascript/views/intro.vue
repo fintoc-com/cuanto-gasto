@@ -23,7 +23,7 @@
            conectar cuenta
       </button>
 
-      <widget v-if="showwidget" v-bind:session="session" @close="closewidget" @linkCreated="linkCreated"></widget>
+      <widget v-if="showwidget" v-bind:widgetWebhookHost="widgetWebhookHost" v-bind:session="session" @close="closewidget" @linkCreated="linkCreated"></widget>
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
       showwidget: false,
     };
   },
-  props: ['session'],
+  props: ['session', 'widgetWebhookHost'],
   components: { widget, },
   methods: {
      openwidget() {

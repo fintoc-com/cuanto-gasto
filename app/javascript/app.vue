@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Intro v-if="isIntro" v-bind:session="session" @goToLoading="setLoadingStep"></Intro>
+    <Intro v-if="isIntro" v-bind:widgetWebhookHost="widgetWebhookHost" v-bind:session="session" @goToLoading="setLoadingStep"></Intro>
     <Loading v-if="isLoading"></Loading>
     <Results v-if="isResults" v-bind:results="results"></Results>
   </div>
@@ -18,6 +18,7 @@ export default {
     return {
       currentStep: 'intro',
       session: '',
+      widgetWebhookHost: WIDGET_WEBHOOK_HOST,
     }
   },
   computed: {
