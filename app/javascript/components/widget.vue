@@ -5,7 +5,7 @@
         <div class="modal-container">
           <iframe
             id="fintocWidget"
-            :src="`https://app.fintoc.com/widget-iframe?public_key=pk_live_FWjn1f1hC8gSwznBuGjCAshr_a_MvqU1&holder_type=individual&redirect_to=${RAILS_URL}/widget-completed-flow&webhook_url=${widgetWebhookHost}/api/v1/fintoc/${session}/webhook`"
+            :src="`https://app.fintoc.com/widget-iframe?public_key=pk_live_FWjn1f1hC8gSwznBuGjCAshr_a_MvqU1&holder_type=individual&redirect_to=${redirectTo}/widget-completed-flow&webhook_url=${widgetWebhookHost}/api/v1/fintoc/${session}/webhook`"
             @load="widgetCallback"
             class="place-content-center"
             width="360"
@@ -20,6 +20,12 @@
 <script>
 export default {
   props: ['session', 'widgetWebhookHost'],
+  computed: {
+    redirectTo() {
+      return `${window.location.protocol}//${window.location.host}`;
+    }
+  },
+
   methods: {
     widgetCallback() {
       const widget = document.getElementById('fintocWidget');
