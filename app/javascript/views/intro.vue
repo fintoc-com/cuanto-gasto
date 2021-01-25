@@ -86,15 +86,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  /* .vertical-slide-fade-enter,
-  .vertical-slide-fade-leave-to {
-    opacity: 0;
-    transform: translatey(-18px);
-  }
-  .vertical-slide-fade-enter-active,
-  .vertical-slide-fade-leave-active {
-    transition: all .5s ease;
-  } */
-</style>
