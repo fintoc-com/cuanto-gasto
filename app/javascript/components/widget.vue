@@ -1,5 +1,5 @@
 <template>
-  <transition name="modal">
+  <transition appear name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">

@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  get '/widget-completed-flow', to: 'widget#completed'
+
   devise_for :users
   mount Sidekiq::Web => '/queue'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
