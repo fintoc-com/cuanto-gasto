@@ -28,7 +28,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "engines": {
-    "node": "12.x"
+    "node": "14.8.0"
   },
   "scripts": {
     "test": "jest",
