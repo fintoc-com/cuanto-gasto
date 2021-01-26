@@ -17,6 +17,10 @@ end
 #  remember_created_at    :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  rappi_result           :float
+#  uber_eats_result       :float
+#  uber_result            :float
+#  total_result           :float
 #
 # Indexes
 #
