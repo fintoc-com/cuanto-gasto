@@ -25,9 +25,11 @@ export default {
     isIntro() {
       return this.currentStep === 'intro';
     },
+
     isLoading() {
       return this.currentStep === 'loading';
     },
+
     isResults() {
       return this.currentStep === 'results';
     },

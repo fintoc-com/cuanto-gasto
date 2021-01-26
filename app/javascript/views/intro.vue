@@ -1,52 +1,158 @@
 <template>
-  <div class="bg-gray-100 min-h-screen flex flex-col">
-    <div class="container max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
-      <h1 class="text-4xl">Cuánto<span class="font-bold">Gasto</span> 💸</h1>
-      <h1 class="mt-5 text-3xl text-center font-regular text-gray-900">
-        Revisa cuánto gastas en delivery 😱
-      </h1>
-      <h1 class="m-5 text-xl text-center text-gray-800">
-        Primero tienes que conectar tu cuenta 🔌 de banco con <a href="https://fintoc.com">fintoc</a>
-      </h1>
+  <div class="bg-gray-100 min-h-screen">
+    <div class="container max-w-xl mx-auto flex flex-col items-center px-2 py-6">
 
-      <button 
-          @click="openwidget"
-          type="submit"
-          class="group relative w-full flex justify-center py-4 px-4 border
-                  border-transparent text-sm leading-5 font-medium rounded-md
-                  text-white fintoc-blue focus:outline-none transition duration-150
-                  ease-in-out focus:opacity-50"
-          :class="{ 'hover:opacity-50': !invalidForm, 'cursor-not-allowed': invalidForm }">
-        <span
-          class="absolute left-0 inset-y-0 flex items-center pl-3">
-          <svg class="h-5 w-5 text-white opacity-25 transition ease-in-out duration-150"
-              fill="currentColor"
-              viewBox="0 0 20 20">
-            <path fill-rule="evenodd"
-                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0
-                    01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                  clip-rule="evenodd" />
-          </svg>
-        </span>
-        Conectar cuenta
-      </button>
-      <div class="mt-6">
-        <p class="font-bold text-xs">Powered by</p>
-        <a href="https://fintoc.com" target="_blank">
-          <img
-            class="mx-auto h-6 w-auto"
-            src="https://d651wjhrjhvon.cloudfront.net/fintoc-logo.svg"
-            alt="fintoc"
-          >
-        </a>
+      <div v-if="showDialog == false">
+        <h1 class="text-5xl text-center font-mono leading-tight text-gray-900">
+          ¿Cuánto gastas en delivery?
+        </h1>
+
+        <h1 class="mt-6 text-6xl text-center">      
+          💸😱
+        </h1>
+
+        <h1 class="mt-6 text-xl text-center text-gray-800 font-mono leading-relaxed">
+          Nuestra A.I calculará tus gastos anuales en comida delivery
+        </h1>
+
+
+
+        <button 
+            @click="closeIntro"
+            type="submit"
+            class="mt-10 fintoc-blue text-white mx-auto group flex justify-center py-2 px-10 border
+                   border-transparent text-sm leading-5 font-medium rounded-2xl
+                   text-white focus:outline-none transition duration-150
+                   ease-in-out focus:opacity-50 hover:opacity-50 font-mono shadow-2xl"
+        >
+          Continuar
+        </button>
+
+        <div class="mt-10 text-center">
+          <p class="text-xs m-1 font-bold font-mono">Powered by</p>
+          <a href="https://fintoc.com" target="_blank">
+            <img
+              class="mx-auto h-6 w-auto"
+              src="https://d651wjhrjhvon.cloudfront.net/fintoc-logo.svg"
+              alt="fintoc"
+            >
+          </a>
+        </div>
       </div>
-      <a href="https://blog.fintoc.com/cuanto-gasto"
-         target="_blank"
-         class="mt-6 text-sm focus:outline-none hover:underline transition ease-in-out duration-150"
-      >
-        ¿Por qué hacemos esto?
-      </a>
-      <widget v-if="showWidget" v-bind:widgetWebhookHost="widgetWebhookHost" v-bind:session="session" @close="closewidget" @linkCreated="linkCreated"></widget>
+
+      <div v-if="showDialog == true" class="mt-12 w-full">
+        <vue-typed-js
+          @onComplete="showNextDialog"
+          :showCursor="false"
+          :backSpeed="100"
+          :typeSpeed="1"
+          :smartBackspace="true"
+          :strings="['Hola! Soy Claudio, una I.A entrenada para detectar cuanto gastas por año en delivery (Rappi y Uber Eats).']"
+        >
+          <h2 class="typing font-mono"></h2>
+        </vue-typed-js>
+
+        <vue-typed-js v-if="showSecondDialog"
+          @onComplete="changeToShowWidgetButton"
+          :showCursor="false"
+          :backSpeed="100"
+          :typeSpeed="1"
+          :smartBackspace="true"
+          :strings="['Voy a necesitar conectarme con tu cuenta bancaria. Solo revisaré los gastos de la tarjeta de crédito.']"
+        >
+          <h2 class="mt-6 typing font-mono"></h2>
+        </vue-typed-js>
+
+        <div class="w-full flex flex-col">
+          <button
+            v-show="showWidgetButton && !showWhyDialog"
+            @click="openWidget"
+            type="submit"
+            class="mt-6 group self-end py-2 px-4 border font-mono
+                  border-transparent text-sm rounded-2xl text-white fintoc-blue
+                  focus:outline-none transition duration-150 shadow-2xl
+                  ease-in-out focus:opacity-50 hover:opacity-50"
+          >
+            Conectar cuenta
+          </button>
+
+          <button
+            v-show="showWidgetButton"
+            @click="changeToChangeShowDialog"
+            type="submit"
+            class="mt-4 group self-end relative py-2 px-4 border font-mono
+                  border-transparent text-sm rounded-2xl
+                  text-white fintoc-blue focus:outline-none transition duration-150
+                  ease-in-out focus:opacity-50 hover:opacity-50 shadow-2xl"
+            :class="{ 'opacity-50': showWhyDialog }">
+            ¿Por qué hacen esto?
+          </button>
+        </div>
+
+        <vue-typed-js v-if="showWhyDialog"
+          @onComplete="finishThirdDialog"
+          :showCursor="false"
+          :backSpeed="100"
+          :typeSpeed="1"
+          :smartBackspace="true"
+          :strings="['Mis creadores me construyeron cómo un ejemplo de las cosas que se pueden construir con Fintoc. Si tienes dudas con los datos, acá está la información.']"
+        >
+          <h2 class="mt-6 typing font-mono"></h2>
+        </vue-typed-js>
+
+        <div class="w-full flex flex-col">
+          <button
+            v-show="thirdDialogFinished && !showNoThanksDialog"
+            @click="openWidget"
+            type="submit"
+            class="mt-6 group self-end py-2 px-4 border font-mono
+                  border-transparent text-sm rounded-2xl text-white fintoc-blue
+                  focus:outline-none transition duration-150 shadow-2xl
+                  ease-in-out focus:opacity-50 hover:opacity-50"
+          >
+            Conectar cuenta
+          </button>
+
+          <button
+            v-show="thirdDialogFinished"
+            @click="changeToChangeShowNoThanksDialog"
+            type="submit"
+            class="mt-4 group self-end relative py-2 px-4 border font-mono
+                  border-transparent text-sm rounded-2xl
+                  text-white fintoc-blue focus:outline-none transition duration-150
+                  ease-in-out focus:opacity-50 hover:opacity-50 shadow-2xl"
+            :class="{ 'opacity-50': showNoThanksDialog }">
+            No gracias
+          </button>
+        </div>
+
+        <vue-typed-js v-if="showNoThanksDialog"
+          @onComplete="finishNothanksDialog"
+          :showCursor="false"
+          :backSpeed="100"
+          :typeSpeed="1"
+          :smartBackspace="true"
+          :strings="['No puedo ver cuanto gastante en Delivery sin conectarme a tu banco.']"
+        >
+          <h2 class="mt-6 typing font-mono"></h2>
+        </vue-typed-js>
+      </div>
+
+      <div class="w-full flex flex-col">
+          <button
+            v-show="noThanksDialogFinished"
+            @click="openWidget"
+            type="submit"
+            class="mt-6 group self-end py-2 px-4 border font-mono
+                  border-transparent text-sm rounded-2xl text-white fintoc-blue
+                  focus:outline-none transition duration-150 shadow-2xl
+                  ease-in-out focus:opacity-50 hover:opacity-50"
+          >
+            Conectar cuenta
+          </button>
+      </div>
+
+      <widget v-if="showWidget" v-bind:widgetWebhookHost="widgetWebhookHost" v-bind:session="session" @close="closeWidget" @linkCreated="linkCreated"></widget>
     </div>
   </div>
 </template>
@@ -58,18 +164,53 @@ export default {
   data() {
     return {
       showWidget: false,
+      showDialog: false,
+      showSecondDialog: false,
+      thirdDialogFinished: false,
+      showWidgetButton: false,
+      showWhyDialog: false,
+      showNoThanksDialog: false,
+      noThanksDialogFinished: false,
     };
   },
   props: ['session', 'widgetWebhookHost'],
   components: { widget, },
   methods: {
-     openwidget() {
-      this.showWidget = true;
-     },
+    finishNothanksDialog(){
+      this.noThanksDialogFinished = true;
+    },
 
-     closewidget() {
+    changeToChangeShowNoThanksDialog() {
+      this.showNoThanksDialog = true;
+    },
+
+    finishThirdDialog() {
+      this.thirdDialogFinished = true;
+    },
+
+    changeToShowWidgetButton() {
+      this.showWidgetButton = true
+    },
+
+    closeIntro() {
+      this.showDialog = true;
+    },
+
+    openWidget() {
+      this.showWidget = true;
+    },
+
+    closeWidget() {
       this.showWidget = false;
-     },
+    },
+
+    showNextDialog() {
+      this.showSecondDialog = true;
+    },
+
+    changeToChangeShowDialog() {
+      this.showWhyDialog = true;
+    },
 
     touchifpresentelsereset(field) {
       // eslint-disable-next-line no-negated-condition

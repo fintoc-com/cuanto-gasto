@@ -1,25 +1,68 @@
 <template>
-  <div class="bg-gray-100 min-h-screen flex flex-col">
-    <div class="container max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
-      <h1 class="text-4xl">Cuánto<span class="font-bold">Gasto</span> 💸</h1>
-      <h1 class="mt-6 text-3xl text-center font-regular text-gray-900">
-        Estamos calculando tus gastos
-      </h1>
+  <div class="bg-gray-100 min-h-screen">
+    <div class="container max-w-xl mx-auto flex flex-col items-center justify-center px-2 py-6">
+      <div class="mt-12 w-full">
+        <vue-typed-js
+          @onComplete="finishFirstParagraph"
+          :showCursor="false"
+          :backSpeed="50"
+          :typeSpeed="40"
+          :smartBackspace="true"
+          :strings="['Estamos procesando tus pagos con tarjeta para calcular tus gastos.']"
+        >
+          <h2 class="typing inline font-mono"></h2>
+        </vue-typed-js>
 
-      <div class="mt-6 loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-48 w-48" />
+        <vue-typed-js
+          v-if="firstParagraphFinished"
+          @onComplete="finishSecondParagraph"
+          :showCursor="false"
+          :backSpeed="50"
+          :typeSpeed="40"
+          :startDelay="3000"
+          :smartBackspace="true"
+          :strings="['Nos podemos demorar unos segundos', 'Nos podemos demorar unos minutos, puedes ir a hacerte un café por mientras.']"
+        >
+          <h2 class="mt-6 typing font-mono"></h2>
+        </vue-typed-js>
 
-      <h1 class="mt-6 text-xl text-center text-gray-800">
-        Nos podemos demorar <span class="italic">un poco</span> puedes ir por un café por mientras ☕
-      </h1>
-      <div class="mt-6">
-        <p class="font-bold text-xs">Powered by</p>
-        <a href="https://fintoc.com" target="_blank">
-          <img
-            class="mx-auto h-6 w-auto"
-            src="https://d651wjhrjhvon.cloudfront.net/fintoc-logo.svg"
-            alt="fintoc"
-          >
-        </a>
+
+        <vue-typed-js
+          v-if="secondParagraphFinished"
+          @onComplete="finishThirdParagraph"
+          :showCursor="false"
+          :startDelay="3000"
+          :backSpeed="50"
+          :typeSpeed="40"
+          :smartBackspace="true"
+          :strings="['Ok, nos está tomando un poco más', 'Ok, nos está tomando más de lo que pensabamos.']"
+        >
+          <h2 class="mt-6 typing font-mono"></h2>
+        </vue-typed-js>
+
+
+        <vue-typed-js
+          v-if="thirdParagraphFinished"
+          @onComplete="finishSecondParagraph"
+          :loop="true"
+          :startDelay="3000"
+          :backDelay="3000"
+          :showCursor="false"
+          :backSpeed="50"
+          :typeSpeed="40"
+          :smartBackspace="true"
+          :strings="['No te hemos abandonado, seguimos trabajando.',
+                     'Paciencia.',
+                     '¿Quizás otro café?',
+                     'Ya estamos casí.',
+                     '¿Sabías que la Universidad de Oxford es más antigua que la cultura Azteca?',
+                     '¿Sabías que el elefante es el único animal del mundo con 4 rodillas?',
+                     '¿Sabías que Fintoc en marzo de 2020?',
+                     'Estamos haciendo calculos muy complicados.',
+                     'Me quedo sin ideas, pero probablemente falta muy poco.']"
+        >
+          <h2 class="mt-6 typing font-mono"></h2>
+        </vue-typed-js>
       </div>
     </div>
   </div>
@@ -27,25 +70,28 @@
 
 <script>
 export default {
-  methods: {
+  data() {
+    return {
+      firstParagraphFinished: false,
+      secondParagraphFinished: false,
+      thirdParagraphFinished: false,
+    };
   },
+  methods: {
+    finishFirstParagraph() {
+      this.firstParagraphFinished = true;
+    },
+
+    finishSecondParagraph() {
+      this.secondParagraphFinished = true;
+    },
+
+    finishThirdParagraph() {
+      this.thirdParagraphFinished = true;
+    }
+  }
 };
 </script>
 
 <style scoped>
-.loader {
-  border-top-color: #101058;
-  -webkit-animation: spinner 1.5s linear infinite;
-  animation: spinner 1.5s linear infinite;
-}
-
-@-webkit-keyframes spinner {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spinner {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 </style>

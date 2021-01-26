@@ -12,7 +12,8 @@
     "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.6",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "vue-typed-js": "^0.1.2"
   },
   "version": "0.1.0",
   "devDependencies": {
@@ -28,7 +29,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "engines": {
-    "node": "14.8.0"
+    "node": "12.16.2"
   },
   "scripts": {
     "test": "jest",
