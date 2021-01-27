@@ -293,9 +293,9 @@ export default {
 
     deliveryExpenses() {
       const { rappi, uber_eats, uber } = this.results.expenses;
-      this.rappi = rappi;
-      this.uber_eats = uber_eats;
-      this.uber = uber;
+      this.rappi = -rappi;
+      this.uber_eats = -uber_eats;
+      this.uber = -uber;
       return rappi + uber_eats + uber;
     },
 
