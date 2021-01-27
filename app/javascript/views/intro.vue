@@ -42,10 +42,10 @@
         <vue-typed-js
           @onComplete="showNextDialog"
           :showCursor="false"
-          :backSpeed="40"
-          :typeSpeed="30"
+          :backSpeed="35"
+          :typeSpeed="20"
           :smartBackspace="true"
-          :strings="['Hola! Soy X AE A-XII, una I.A entrenada para detectar cuanto gastas por año en delivery (Rappi y Uber Eats).']"
+          :strings="['Hola! Soy Bender, una I.A entrenada para detectar cuanto gastas por año en delivery (Rappi y Uber Eats).']"
         >
           <h2 class="typing font-mono"></h2>
         </vue-typed-js>
@@ -53,8 +53,8 @@
         <vue-typed-js v-if="showSecondDialog"
           @onComplete="changeToShowWidgetButton"
           :showCursor="false"
-          :backSpeed="40"
-          :typeSpeed="30"
+          :backSpeed="35"
+          :typeSpeed="20"
           :smartBackspace="true"
           :strings="['Voy a necesitar conectarme con tu cuenta bancaria. Solo revisaré los gastos de la tarjeta de crédito.']"
         >
@@ -90,8 +90,8 @@
         <vue-typed-js v-if="showWhyDialog"
           @onComplete="finishThirdDialog"
           :showCursor="false"
-          :backSpeed="40"
-          :typeSpeed="30"
+          :backSpeed="35"
+          :typeSpeed="20"
           :smartBackspace="true"
           :strings="['Mis creadores me construyeron cómo un ejemplo de las cosas que se pueden construir con Fintoc.']"
         >
@@ -127,8 +127,8 @@
         <vue-typed-js v-if="showNoThanksDialog"
           @onComplete="finishNothanksDialog"
           :showCursor="false"
-          :backSpeed="40"
-          :typeSpeed="30"
+          :backSpeed="35"
+          :typeSpeed="20"
           :smartBackspace="true"
           :strings="['No puedo ver cuanto gastaste en Delivery sin conectarme a tu banco. Conectar tu cuenta de banco usando Fintoc es seguro. Tus datos se mantienen privados y la conexión con el banco se encuentra encriptada.']"
         >

@@ -5,8 +5,8 @@
         <vue-typed-js
           @onComplete="finishFirstParagraph"
           :showCursor="false"
-          :backSpeed="50"
-          :typeSpeed="40"
+          :backSpeed="35"
+          :typeSpeed="25"
           :smartBackspace="true"
           :strings="['Estamos procesando tus pagos con tarjeta. 💳 Pronto calcularemos tus gatos. 🤖 beep boop']"
         >
@@ -17,8 +17,8 @@
           v-if="firstParagraphFinished"
           @onComplete="finishSecondParagraph"
           :showCursor="false"
-          :backSpeed="50"
-          :typeSpeed="40"
+          :backSpeed="35"
+          :typeSpeed="25"
           :startDelay="3000"
           :smartBackspace="true"
           :strings="['Nos podemos demorar unos segundos 🕗', 'Nos podemos demorar unos minutos 🕔, puedes ir a hacerte un café por mientras. ☕️']"
@@ -31,8 +31,8 @@
           @onComplete="finishThirdParagraph"
           :showCursor="false"
           :startDelay="3000"
-          :backSpeed="50"
-          :typeSpeed="40"
+          :backSpeed="35"
+          :typeSpeed="25"
           :smartBackspace="true"
           :strings="['Ok, nos está tomando un poco más 😅', 'Ok, nos está tomando más de lo que pensabamos. 😐']"
         >
@@ -47,8 +47,8 @@
           :startDelay="3000"
           :backDelay="3000"
           :showCursor="false"
-          :backSpeed="50"
-          :typeSpeed="40"
+          :backSpeed="35"
+          :typeSpeed="25"
           :smartBackspace="true"
           :strings="['No te hemos abandonado, seguimos trabajando. 🚧',
                      'Paciencia.',
