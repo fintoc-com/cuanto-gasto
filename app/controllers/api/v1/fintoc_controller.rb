@@ -7,8 +7,8 @@ class Api::V1::FintocController < Api::V1::BaseController
     if REDIS_CONNECTION.exists?(key)
       link_token = REDIS_CONNECTION.get(key)
 
-      link = client.get_link(link_token)
-      @credit_cards = link.find_all(type: 'credit_card')
+      @link = client.get_link(link_token)
+      @credit_cards = @link.find_all(type: 'credit_card')
 
       if @credit_cards.none? { |cc| cc.refreshed_at.nil? }
         result = calculate_result
@@ -32,7 +32,15 @@ class Api::V1::FintocController < Api::V1::BaseController
   end
 
   def calculate_result
-    { status: 'completed', expenses: calculate_expenses, investment: calculate_investment }
+    expenses = calculate_expenses
+
+    result_row = Result.find_or_create_by(link_id: @link.id)
+    result_row.update!(rappi_result: -expenses[:rappi],
+                       uber_eats_result: -expenses[:uber_eats],
+                       uber_result: -expenses[:uber],
+                       total_result: -(expenses[:rappi] + expenses[:uber_eats] + expenses[:uber]))
+
+    { status: 'completed', expenses: expenses, investment: calculate_investment, percentiles: calculate_percentiles(expenses) }
   end
 
   def calculate_expenses
@@ -78,6 +86,31 @@ class Api::V1::FintocController < Api::V1::BaseController
     @credit_cards.filter { |cc| cc.currency == currency }
                  .map { |cc| cc.get_movements(since: '2020-01-01', until: '2020-12-31', per_page: 300).force }
                  .flatten
+  end
+
+  def calculate_percentiles(expenses)
+    rappi = percentile_arrays.find { |x| x[:rappi] > -expenses[:rappi] }.try(:[], :p) || 0.99
+    uber = percentile_arrays.find { |x| x[:uber] > -expenses[:uber] }.try(:[], :p) || 0.99
+    uber_eats = percentile_arrays.find { |x| x[:uber_eats] > -expenses[:uber_eats] }.try(:[], :p) || 0.99
+    total_expenses = expenses[:rappi] + expenses[:uber] + expenses[:uber_eats]
+    total = percentile_arrays.find { |x| x[:total] > -total_expenses }.try(:[], :p) || 0.99
+
+    { rappi: rappi.to_f, uber_eats: uber_eats.to_f, uber: uber.to_f, total: total.to_f }
+  end
+
+  def percentile_arrays
+    sql = <<-SQL
+      SELECT k,
+        PERCENTILE_DISC(k) WITHIN GROUP ( ORDER BY rappi_result ),
+        PERCENTILE_DISC(k) WITHIN GROUP ( ORDER BY uber_result ),
+        PERCENTILE_DISC(k) WITHIN GROUP ( ORDER BY uber_eats_result ),
+        PERCENTILE_DISC(k) WITHIN GROUP ( ORDER BY total_result )
+        FROM results, generate_series(0.01, 1, 0.01) as k
+        GROUP BY k
+    SQL
+    @percentile_arrays ||= ActiveRecord::Base.connection.execute(sql).values.map do |tup|
+      { p: tup[0], rappi: tup[1], uber: tup[2], uber_eats: tup[3], total: tup[4] }
+    end
   end
 
   def calculate_delivery(regex); end
