@@ -281,7 +281,7 @@ export default {
       if (this.rappi > this.uber_eats) {
         return `Vamos por partes. Te gusta más Rappi que UberEats. De hecho te gusta ${(this.rappi / this.uber_eats).toFixed(1)} veces más.`
       } else if (this.rappi < this.uber_eats) {
-        return `Vamos por partes. Prefieres UberEats sobre Rappi. De hecho lo prefieres ${((this.uber_eats) / (this.rappi).toFixed(1))} veces más.`
+        return `Vamos por partes. Prefieres UberEats sobre Rappi. De hecho lo prefieres ${(this.uber_eats / this.rappi).toFixed(1)} veces más.`
       } else {
         return 'Vamos por partes. Te gusta Rappi y UberEats por igual. Curioso.';
       }      
