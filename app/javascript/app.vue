@@ -67,7 +67,6 @@ export default {
         .then((resp) => {
             if (resp.data.status === 'completed') {
               this.results = resp.data;
-              console.log(this.results);
               this.setResultStep();
               clearInterval(this.polling);
             }

@@ -1,14 +1,14 @@
 <template>
-  <div class="bg-gray-100 min-h-screen">
-    <div class="container max-w-xl mx-auto flex flex-col items-center justify-center px-2 py-6" v-show="!showPressKit">
-      <div class="mt-12 w-full flex flex-col" v-if="!finished">
+  <div>
+    <div class="container max-w-xl mx-auto flex flex-col items-center justify-center my-6" v-show="!showPressKit">
+      <div class="mt-4 sm:mt-12 w-full flex flex-col" v-if="!finished">
         <vue-typed-js
           @onComplete="changeToShowExperience"
           :showCursor="false"
           :backSpeed="40"
           :typeSpeed="35"
           :smartBackspace="true"
-          :strings="['Ya terminamos de procesar tus gastos. 🤖  Veamos cómo estuvo el 2020. 🧐']"
+          :strings="['Ya terminamos de procesar tus gastos. Veamos cómo estuvo el 2020. 🧐']"
         >
           <h2 class="typing inline font-mono"></h2>
         </vue-typed-js>
@@ -58,6 +58,21 @@
             </vue-typed-js>
           </div>
 
+
+          <vue-typed-js
+            v-if="showBeforeEnding"
+            :showCursor="false"
+            @onComplete="goToEnding"
+            :startDelay="2000"
+            :backDelay="1000"
+            :backSpeed="40"
+            :typeSpeed="35"
+            :smartBackspace="true"
+            :strings="['Entonces... que aprendimos hoy 🔍']"
+          >
+            <h2 class="mt-6 typing inline font-mono"></h2>
+          </vue-typed-js>
+
           <vue-typed-js
             v-if="isSmallExpenseExperience && cityTripsFinished"
             :showCursor="false"
@@ -67,7 +82,7 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="['Este año no gastaste mucho en delivery. No debes tener mucha plata. 😅', `Este año no gastaste mucho en delivery. Eres un buen administrador 🤭. Estimo que pides delivery 1-2 veces por semana. 💸 ${finalMessage}`]"
+            :strings="['Este año no gastaste mucho en delivery. No debes tener mucha plata. 😅', `Este año no gastaste mucho en delivery. Eres un buen administrador. 🤭 Estimo que pides delivery 1-2 veces por semana. 💸 `]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -81,7 +96,7 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="[`Te guuuuusta el delivery ah! 🐽 Bueno no te culpo, pandemia y todo eso 🦠. Estimo que pides delivery 3-4 veces por semana 😅. ${finalMessage}`]"
+            :strings="[`De verdad te guuuuusta el delivery ah! 🐽 Bueno no te culpo, pandemia y todo eso. 🦠 Estimo que pides delivery 3-4 veces por semana. 😅`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -95,7 +110,7 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="['Este año no gastaste muuuucho en Delivery. 😃', `Este año gastaste muuuuuuuuuuuuuuucho en Delivery.😆 Demasiado. Estás bien? Se te pasó la mano. Deberias considerar tomar clases de cocina. Tus números me dicen que pides delivery 4 veces por semana. 💸 ${finalMessage}`]"
+            :strings="['Este año no gastaste muuuucho en Delivery. 😃', `Este año gastaste muuuuuuuuuuuuuuucho en Delivery.😆 Demasiado. Estás bien? Se te pasó la mano. Deberias considerar tomar clases de cocina. Tus números me dicen que pides delivery 4 veces por semana.`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -109,7 +124,21 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="['No, estos números no me cuadran debe haber un problema 😐. Es imposible lo que veo.', `Acabo de revisar y el problema eres tú. Soy un robot solamente 🤖, pero deberías pedir ayuda. Pides Delivery casi todos los días. 💸 ${finalMessage}`]"
+            :strings="['No, estos números no me cuadran debe haber un problema 😐. Es imposible lo que veo.', `Acabo de revisar y el problema eres tú. Soy un robot solamente 🤖, pero deberías pedir ayuda. Pides Delivery casi todos los días.`]"
+          >
+            <h2 class="mt-6 typing inline font-mono"></h2>
+          </vue-typed-js>
+
+          <vue-typed-js
+            v-if="showFintual"
+            :showCursor="false"
+            @onComplete="showButton"
+            :startDelay="2000"
+            :backDelay="1000"
+            :backSpeed="40"
+            :typeSpeed="35"
+            :smartBackspace="true"
+            :strings="[`${finalMessage}`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -127,43 +156,43 @@
         </button>
       </div>
 
-      <div v-if="finished" class="font-mono">
-        <h1 class="mt-6 text-xl text-center font-regular text-gray-900">
-          Te gastaste en delivery
+      <div v-if="finished" class="font-mono flex flex-col items-center justify-center">
+        <h1 class="mt-6 text-lg sm:text-xl text-center font-regular text-gray-900">
+          Te gastaste en delivery 💸
         </h1>
-        <h2 class="mt-6 text-5xl text-center text-red-500">
+        <h2 class="text-2xl sm:mt-6 sm:text-5xl text-center text-red-500">
           ${{ deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
         </h2>
         <div class="flex flex-row justify-between">
-          <div class="w-56">
-            <h1 class="mt-6 text-xl text-center font-regular text-gray-900">
+          <div class="w-24 sm:w-56">
+            <h1 class="mt-6 text-lg sm:text-xl text-center font-regular text-gray-900">
               Rappi
             </h1>
-            <h2 class="mt-6 text-lg text-center text-red-500">
+            <h2 class="mt-6 text-sm sm:text-lg text-center text-red-500">
               ${{ rappi.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
             </h2>
           </div>
-          <div class="w-56">
-            <h1 class="mt-6 text-xl text-center font-regular text-gray-900">
+          <div class="w-24 sm:w-56">
+            <h1 class="mt-6 text-lg sm:text-xl text-center font-regular text-gray-900">
               Uber Eats
             </h1>
-            <h2 class="mt-6 text-lg text-center text-red-500">
+            <h2 class="mt-6 text-sm sm:text-lg text-center text-red-500">
               ${{ uber_eats.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
             </h2>
           </div>
-          <div class="w-56">
-            <h1 class="mt-6 text-xl text-center font-regular text-gray-900">
+          <div class="w-24 sm:w-56">
+            <h1 class="mt-6 text-lg sm:text-xl text-center font-regular text-gray-900">
               Uber
             </h1>
-            <h2 class="mt-6 text-lg text-center text-red-500">
+            <h2 class="mt-6 text-sm sm:text-lg text-center text-red-500">
               ${{ uber.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
             </h2>
           </div>
         </div>
-        <h1 class="mt-6 text-xl text-center font-regular text-gray-900">
-          Esa plata invertida en Fondos Mutuos hoy sería
+        <h1 class="mt-6 text-lg sm:text-xl text-center font-regular text-gray-900">
+          Esa plata invertida en Fondos Mutuos hoy sería 📈
         </h1>
-        <h2 class="mt-6 text-3xl text-center text-green-500">
+        <h2 class="mt-6 text-xl sm:text-3xl text-center text-green-500">
           ${{ savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
         </h2>
 
@@ -226,9 +255,11 @@ export default {
   data() {
     return {
       rappiOverUberFinished: false,
+      showFintual: false,
       showExperience: false,
       showSummaryButton: false,
       cityTripsFinished: false,
+      showBeforeEnding: false,
       showPressKit: false,
       showWidget: false,
       finished: false,
@@ -263,61 +294,73 @@ export default {
     cityTripsMessage1() {
       if (this.uber == 0) {
         return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste. 🤨'
+      } else if (this.uber < 250000) {
+        return 'Que? Pero que veo acá, en serio? 👀  Al parecer también fuiste a muchas fiestas clandestinas. 🤫'
       } else {
-        return 'También fuiste a muchas fiestas clandestinas. 🤫'
+        return '... 😐  En serio? Gastaste todo esto en Uber?'
       }
     },
 
     cityTripsMessage2() {
+      const uberText = this.uber.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
       if (this.uber == 0) {
         return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste. 🤨'
       } else if (this.uber < 250000) {
-        return `Nuestra I.A. nos dice que gastaste ${this.uber} CLP en Uber 👀. A donde viajabas tanto en pandemia? 😏`
-      } else {
+        return `Que? Pero que veo acá, en serio? 👀  Al parecer viajabas harto en pandemia. 🚗 Gastaste $${uberText} CLP en Uber.`
+      } else if (this.uber < 500000) {
         let extendMessage = 'A comprar comida supongo 👀 por que no pediste mucho a la casa.';
         if (this.rappi > 50000 || this.uber_eats > 50000) {
           extendMessage = '...Si ya sabemos que comida no te falto 🤭';
         }
-        return `... 😐 Tú si que te moviste por la ciudad. 🚗 Gastaste $${this.uber.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP en Uber. 💸  A donde viajabas tanto? ${extendMessage}`
+        return `... 😐  En serio? Gastaste todo esto en Uber? Tú si que te moviste por la ciudad. 🚗 Gastaste $${uberText} CLP en Uber. 💸  A donde viajabas tanto? ${extendMessage}`
+      } else {
+        return `... Creo que estoy funcionando mal. 😐 Puedes avisarle a mis creadores? Por que no encuentro explicacion a esto. Viajaste a Argentina o que, como gastaste $${uberText} CLP en Uber 🤯`
       }
     },
 
     rappiOverUberText() {
       if (this.rappi > this.uber_eats) {
-        return `Vamos por partes. Nuestra I.A. nos dice que te gusta más Rappi que UberEats. De hecho te gusta ${(this.rappi / this.uber_eats).toFixed(1)} veces más. Que tienes con Rappi? 🤨   Estás bien? No necesitas ayuda?`
+        return `Veamos... Mi cerebro artificial 🤖 dice que te gusta más Rappi que UberEats. De hecho te gusta ${(this.rappi / this.uber_eats).toFixed(1)} veces más. Que tienes con Rappi? 🤨  Estás bien?`
       } else if (this.rappi < this.uber_eats) {
-        return `Vamos por partes. Nuestra I.A. nos dice que prefieres UberEats sobre Rappi. De hecho lo prefieres ${(this.uber_eats / this.rappi).toFixed(1)} veces más. Que tienes con Uber? 🤨   Estás bien? No necesitas ayuda?`
-      } else if (this.rappi === 0 && this.uber_eats === 0) {
-        `Vamos por partes. Nuestra super I.A nos dice que... no tienes mucha plata?         No no... perdon, me equivoque de cuenta. Simplemente eres bueno ahorrando 😜`
+        return `Veamos... Mi cerebro artificial 🤖 dice que prefieres UberEats sobre Rappi. De hecho lo prefieres ${(this.uber_eats / this.rappi).toFixed(1)} veces más. Que tienes con Uber? 🤨  Estás bien?`
       } else {
-        return 'Vamos por partes. Nuestra I.A. nos dice que te gusta Rappi y UberEats ...por igual? 😱 ...Esto significa que eres igual de malo ahorrando en ambas plataformas 🤭 Bueno, sigamos.';
+        return 'Veamos... Mi cerebro artificial 🤖  dice que te gusta Rappi y UberEats ...por igual? 😱 ...Esto significa que eres igual de malo ahorrando en ambas plataformas 🤭 Bueno, sigamos.';
       }
     },
 
     finalMessage() {
-      return `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP 💸, en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
+      return `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 💸  Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
     },
 
     deliveryExpenses() {
       const { rappi, uber_eats, uber } = this.results.expenses;
+      // const { rappi, uber_eats, uber } = { rappi: -450000, uber_eats: -500000, uber: -750000 };
       this.rappi = -rappi;
       this.uber_eats = -uber_eats;
       this.uber = -uber;
-      console.log(-rappi + -uber_eats + -uber)
       return -rappi + -uber_eats + -uber;
     },
 
     savings() {
       const { rappi, uber_eats, uber } = this.results.investment;
+      // const { rappi, uber_eats, uber } = { rappi: 490000, uber_eats: 550000, uber: 250000 };
       return rappi + uber_eats + uber;
     }
   },
   methods: {
     finishLastDialog(){
-      this.showSummaryButton = true;
+      this.showFintual = true;
+    },
+
+    showButton() {
+      this.showSummaryButton = true
     },
 
     finishCityTrips(){
+      this.showBeforeEnding = true;
+    },
+
+    goToEnding() {
       this.cityTripsFinished = true;
     },
 

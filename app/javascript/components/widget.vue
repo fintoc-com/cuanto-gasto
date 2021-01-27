@@ -34,7 +34,6 @@ export default {
       if (!url.href.includes('widget-completed-flow')) return;
 
       const result = url.searchParams.get('result');
-      console.log(result);
       if (result === "user_exited") {
         this.$emit('close');
       }
