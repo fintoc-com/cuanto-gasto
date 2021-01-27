@@ -124,7 +124,7 @@
                 text-white fintoc-blue focus:outline-none transition duration-150
                 ease-in-out focus:opacity-50 hover:opacity-50 shadow-2xl">
           Resumen de tus gastos
-        </button>        
+        </button>
       </div>
 
       <div v-if="finished" class="font-mono">
@@ -186,7 +186,7 @@
           </button>
           <a class="pr-5 pl-10 underline" href="mailto:hello@fintoc.com">Email Us </a>
         </div>
-      </div> 
+      </div>
     </div>
 
     <div class="container max-w-xl mx-auto flex flex-col items-center justify-center px-2 py-6" v-show="showPressKit">
@@ -283,7 +283,7 @@ export default {
         return `Vamos por partes. Prefieres UberEats sobre Rappi. De hecho lo prefieres ${(this.uber_eats / this.rappi).toFixed(1)} veces más.`
       } else {
         return 'Vamos por partes. Te gusta Rappi y UberEats por igual. Curioso.';
-      }      
+      }
     },
 
     finalMessage() {
@@ -322,6 +322,8 @@ export default {
 
     toggleShowPressKit() {
       this.showPressKit = !this.showPressKit;
+
+      if (this.showPressKit) window.analytics.track('Press Kit Viewed');
     },
 
     finishDialog() {

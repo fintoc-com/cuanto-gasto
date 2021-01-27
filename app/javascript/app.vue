@@ -37,16 +37,19 @@ export default {
   components: { Intro, Loading, Results },
 
   created() {
+    window.analytics.track('Intro Viewed');
     this.fetchSession();
   },
 
   methods: {
     setLoadingStep() {
+      window.analytics.track('Loading Results Viewed');
       this.currentStep = 'loading';
       this.pollForResults();
     },
 
     setResultStep() {
+      window.analytics.track('Results Viewed');
       this.currentStep = 'results';
     },
 

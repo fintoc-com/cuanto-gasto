@@ -7,7 +7,7 @@
           ¿Cuánto gastas en delivery?
         </h1>
 
-        <h1 class="mt-6 text-6xl text-center">      
+        <h1 class="mt-6 text-6xl text-center">
           💸😱
         </h1>
 
@@ -15,7 +15,7 @@
           Nuestra A.I calculará tus gastos anuales en comida delivery
         </h1>
 
-        <button 
+        <button
             @click="closeIntro"
             type="submit"
             class="mt-10 fintoc-blue text-white mx-auto group flex justify-center py-2 px-10 border
@@ -191,14 +191,17 @@ export default {
     },
 
     closeIntro() {
+      window.analytics.track('Intro Dialog Viewed');
       this.showDialog = true;
     },
 
     openWidget() {
+      window.analytics.track('Widget Opened');
       this.showWidget = true;
     },
 
     closeWidget() {
+      window.analytics.track('Widget Closed');
       this.showWidget = false;
     },
 
@@ -220,6 +223,7 @@ export default {
     },
 
     linkCreated() {
+      window.analytics.track('Link Created');
       this.$emit('goToLoading');
     },
   },
