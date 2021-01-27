@@ -336,25 +336,25 @@ export default {
       // const { rappi, uber, uber_eats} = { rappi: 0.51, uber: 0.9, uber_eats: 0.1};
       if (this.rappi > 0) {
         if (rappi < 0.1) {
-          percentileMessage += `Estás en el ${rappi*100}% que menos gasta en Rappi.`
+          percentileMessage += `Estás en el ${(rappi*100).toFixed(1)}% que menos gasta en Rappi.`
         } else if (rappi < 0.5) {
-          percentileMessage += `Estás en el ${rappi*100}% que menos gasta en Rappi.`
+          percentileMessage += `Estás en el ${(rappi*100).toFixed(1)}% que menos gasta en Rappi.`
         } else if (rappi < 0.85) {
-          percentileMessage += `Estás sobre el ${rappi*100}% que mas gasta en Rappi.`
+          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que mas gasta en Rappi.`
         } else {
-          percentileMessage += `Estás sobre el ${rappi*100}% que mas gasta en Rappi.`
+          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que mas gasta en Rappi.`
         }
       }
 
       if (this.uber_eats > 0) {
         if (uber_eats < 0.1) {
-          percentileMessage += `Estás en el ${uber_eats*100}% que menos gasta en UberEats.`
+          percentileMessage += `Estás en el ${(uber_eats*100).toFixed(1)}% que menos gasta en UberEats.`
         } else if (rappi < 0.5) {
-          percentileMessage += `Estás en el ${uber_eats*100}% que menos gasta en UberEats.`
+          percentileMessage += `Estás en el ${(uber_eats*100).toFixed(1)}% que menos gasta en UberEats.`
         } else if (uber < 0.85) {
-          percentileMessage += `Estás sobre el ${uber_eats*100}% que mas gasta en UberEats.`
+          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que mas gasta en UberEats.`
         } else {
-          percentileMessage += `Estás sobre el ${uber_eats*100}% que mas gasta en UberEats.`
+          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que mas gasta en UberEats.`
         }
       }
 
@@ -377,17 +377,17 @@ export default {
       if (this.uber > 0) {
         percentileMessage += 'También encontre que'
         if (uber < 0.1) {
-          percentileMessage += ` con suerte usar uber. 🚙 Estás en el ${uber*100}% que menos gasta en Uber.`
+          percentileMessage += ` con suerte usar uber. 🚙 Estás en el ${(uber*100).toFixed(1)}% que menos gasta en Uber.`
         } else if (rappi < 0.5) {
-          percentileMessage += ` estás en el ${uber*100}% que menos gasta en Uber. 🚗 A donde viajabas tanto en pandemia? 🤨`
+          percentileMessage += ` estás en el ${(uber*100).toFixed(1)}% que menos gasta en Uber. 🚗 A donde viajabas tanto en pandemia? 🤨`
         } else if (uber < 0.85) {
-          percentileMessage += `... omitire comentarios. 🚗  Estás sobre el ${uber*100}% que mas gasta en Uber. `
+          percentileMessage += `... omitire comentarios. 🚗  Estás sobre el ${(uber*100).toFixed(1)}% que mas gasta en Uber. `
         } else {
-          percentileMessage += `...🤯  Creo que te salía más barato viajar en 🚐 o 🛩. Estás sobre el ${uber*100}% que mas gasta en Uber. `
+          percentileMessage += `...🤯  Creo que te salía más barato viajar en 🚐 o 🛩. Estás sobre el ${(uber*100).toFixed(1)}% que mas gasta en Uber. `
         }
       }
 
-      const fintualMessage = `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 💸  Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
+      const fintualMessage = `\nEl total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 💸  Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
       return `${percentileMessage} \n ${fintualMessage}`
     },
 
