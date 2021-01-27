@@ -384,11 +384,11 @@ export default {
           percentileMessage += `... omitire comentarios. 🚗  Estás sobre el ${uber*100}% que mas gasta en Uber. `
         } else {
           percentileMessage += `...🤯  Creo que te salía más barato viajar en 🚐 o 🛩. Estás sobre el ${uber*100}% que mas gasta en Uber. `
-        } d
+        }
       }
 
       const fintualMessage = `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 💸  Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
-      return `${percentileMessage}. \n ${fintualMessage}`
+      return `${percentileMessage} \n ${fintualMessage}`
     },
 
     deliveryExpenses() {

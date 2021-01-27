@@ -8,7 +8,7 @@
           :backSpeed="50"
           :typeSpeed="40"
           :smartBackspace="true"
-          :strings="['Estamos procesando tus pagos con tarjeta para calcular tus gastos. 🤖 beep boop']"
+          :strings="['Estamos procesando tus pagos con tarjeta. 💳 Pronto calcularemos tus gatos. 🤖 beep boop']"
         >
           <h2 class="typing inline font-mono"></h2>
         </vue-typed-js>
@@ -58,7 +58,8 @@
                      '¿Sabías que el elefante es el único animal del mundo con 4 rodillas? 😱',
                      '¿Sabías que Fintoc nacio en marzo del 2020? 😏',
                      'Estamos haciendo calculos muy complicados. 🧮 beep boop. 🤖',
-                     'Me quedo sin ideas, pero probablemente falta muy poco. 🕞'
+                     'Me quedo sin ideas, pero probablemente falta muy poco. 🕞',
+                     'Se me ocurrieron un par más! 💡',
                      ]"
         >
           <h2 class="mt-6 typing font-mono"></h2>
