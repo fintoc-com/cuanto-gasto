@@ -15,14 +15,12 @@
           Nuestra A.I calculará tus gastos anuales en comida delivery
         </h1>
 
-
-
         <button 
             @click="closeIntro"
             type="submit"
             class="mt-10 fintoc-blue text-white mx-auto group flex justify-center py-2 px-10 border
                    border-transparent text-sm leading-5 font-medium rounded-2xl
-                   text-white focus:outline-none transition duration-150
+                   focus:outline-none transition duration-150
                    ease-in-out focus:opacity-50 hover:opacity-50 font-mono shadow-2xl"
         >
           Continuar
@@ -44,8 +42,8 @@
         <vue-typed-js
           @onComplete="showNextDialog"
           :showCursor="false"
-          :backSpeed="100"
-          :typeSpeed="1"
+          :backSpeed="40"
+          :typeSpeed="30"
           :smartBackspace="true"
           :strings="['Hola! Soy Claudio, una I.A entrenada para detectar cuanto gastas por año en delivery (Rappi y Uber Eats).']"
         >
@@ -55,8 +53,8 @@
         <vue-typed-js v-if="showSecondDialog"
           @onComplete="changeToShowWidgetButton"
           :showCursor="false"
-          :backSpeed="100"
-          :typeSpeed="1"
+          :backSpeed="40"
+          :typeSpeed="30"
           :smartBackspace="true"
           :strings="['Voy a necesitar conectarme con tu cuenta bancaria. Solo revisaré los gastos de la tarjeta de crédito.']"
         >
@@ -92,8 +90,8 @@
         <vue-typed-js v-if="showWhyDialog"
           @onComplete="finishThirdDialog"
           :showCursor="false"
-          :backSpeed="100"
-          :typeSpeed="1"
+          :backSpeed="40"
+          :typeSpeed="30"
           :smartBackspace="true"
           :strings="['Mis creadores me construyeron cómo un ejemplo de las cosas que se pueden construir con Fintoc. Si tienes dudas con los datos, acá está la información.']"
         >
@@ -129,8 +127,8 @@
         <vue-typed-js v-if="showNoThanksDialog"
           @onComplete="finishNothanksDialog"
           :showCursor="false"
-          :backSpeed="100"
-          :typeSpeed="1"
+          :backSpeed="40"
+          :typeSpeed="30"
           :smartBackspace="true"
           :strings="['No puedo ver cuanto gastante en Delivery sin conectarme a tu banco.']"
         >
