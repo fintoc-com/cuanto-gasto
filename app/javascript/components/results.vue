@@ -332,7 +332,7 @@ export default {
 
     finalMessage() {
       let percentileMessage = '';
-      const { rappi, uber, uber_eats} = this.percentile;
+      const { rappi, uber, uber_eats} = this.percentiles;
       // const { rappi, uber, uber_eats} = { rappi: 0.51, uber: 0.9, uber_eats: 0.1};
       if (this.rappi > 0) {
         if (rappi < 0.1) {
