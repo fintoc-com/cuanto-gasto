@@ -129,6 +129,20 @@
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
 
+           <vue-typed-js
+            v-if="showPercentile"
+            :showCursor="false"
+            @onComplete="showFintualChange"
+            :startDelay="2000"
+            :backDelay="1000"
+            :backSpeed="40"
+            :typeSpeed="35"
+            :smartBackspace="true"
+            :strings="[`${percentileSummaryMessage}`]"
+          >
+            <h2 class="mt-6 typing inline font-mono"></h2>
+          </vue-typed-js>
+
           <vue-typed-js
             v-if="showFintual"
             :showCursor="false"
@@ -256,6 +270,7 @@ export default {
     return {
       rappiOverUberFinished: false,
       showFintual: false,
+      showPercentile: false,
       showExperience: false,
       showSummaryButton: false,
       cityTripsFinished: false,
@@ -331,45 +346,49 @@ export default {
     },
 
     finalMessage() {
+      return `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 💸  Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
+    },
+
+    percentileSummaryMessage() {
       let percentileMessage = '';
       const { rappi, uber, uber_eats} = this.percentiles;
-      // const { rappi, uber, uber_eats} = { rappi: 0.51, uber: 0.9, uber_eats: 0.1};
+      // const { rappi, uber, uber_eats} = { rappi: 0.51, uber: 0.9123, uber_eats: 0.111111};
       if (this.rappi > 0) {
         if (rappi < 0.1) {
-          percentileMessage += `Estás en el ${(rappi*100).toFixed(1)}% que menos gasta en Rappi.`
+          percentileMessage += `Estás en el ${(rappi*100).toFixed(1)}% que menos gasta en Rappi. `
         } else if (rappi < 0.5) {
-          percentileMessage += `Estás en el ${(rappi*100).toFixed(1)}% que menos gasta en Rappi.`
+          percentileMessage += `Estás en el ${(rappi*100).toFixed(1)}% que menos gasta en Rappi. `
         } else if (rappi < 0.85) {
-          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que mas gasta en Rappi.`
+          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que mas gasta en Rappi. `
         } else {
-          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que mas gasta en Rappi.`
+          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que mas gasta en Rappi. `
         }
       }
 
       if (this.uber_eats > 0) {
         if (uber_eats < 0.1) {
-          percentileMessage += `Estás en el ${(uber_eats*100).toFixed(1)}% que menos gasta en UberEats.`
+          percentileMessage += `Estás en el ${(uber_eats*100).toFixed(1)}% que menos gasta en UberEats. `
         } else if (rappi < 0.5) {
-          percentileMessage += `Estás en el ${(uber_eats*100).toFixed(1)}% que menos gasta en UberEats.`
+          percentileMessage += `Estás en el ${(uber_eats*100).toFixed(1)}% que menos gasta en UberEats. `
         } else if (uber < 0.85) {
-          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que mas gasta en UberEats.`
+          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que mas gasta en UberEats. `
         } else {
-          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que mas gasta en UberEats.`
+          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que mas gasta en UberEats. `
         }
       }
 
       if ((this.rappi === 0 && this.uber_eats === 0) || (rappi < 0.1 && uber_eats < 0.1)) {
-        percentileMessage +=  'Eres bueno ahorrando! 🥳'
+        percentileMessage +=  'Eres bueno ahorrando! 🥳 '
       } else {
         if (this.rappi > 0 || this.uber_eats > 0) {
           if (rappi <= 0.1 && uber_eats <= 0.1) {
-            percentileMessage +=  'Eres bueno ahorrando! 🥳'
+            percentileMessage +=  'Eres bueno ahorrando! 🥳 '
           } else if ((rappi > 0.1 && rappi <= 0.5) || (uber_eats > 0.1 && uber_eats <= 0.5)) {
-            percentileMessage +=  'Podrías aprender a cocinar y ahorrarias bastante. 👩‍🍳🧑‍🍳'
+            percentileMessage +=  'Podrías aprender a cocinar y ahorrarias bastante. 👩‍🍳🧑‍🍳 '
           } else if ((rappi > 0.5 && rappi <= 0.85) || (uber_eats > 0.5 && uber_eats <= 0.85)) {
-            percentileMessage +=  '😧 Podrias hasta pagarte clases de cocina.'
+            percentileMessage +=  '😧 Podrias hasta pagarte clases de cocina. '
           } else {
-            percentileMessage += '... 🤯  Cada vez que me salga que Rappi o UberEats estan con mucha demanda, te voy a echar la culpa. 😖'
+            percentileMessage += '... 🤯  Cada vez que me salga que Rappi o UberEats estan con mucha demanda, te voy a echar la culpa. 😖 '
           }
         }
       }
@@ -381,14 +400,12 @@ export default {
         } else if (rappi < 0.5) {
           percentileMessage += ` estás en el ${(uber*100).toFixed(1)}% que menos gasta en Uber. 🚗 A donde viajabas tanto en pandemia? 🤨`
         } else if (uber < 0.85) {
-          percentileMessage += `... omitire comentarios. 🚗  Estás sobre el ${(uber*100).toFixed(1)}% que mas gasta en Uber. `
+          percentileMessage += `... creo que omitire comentarios. 🚗  Estás sobre el ${(uber*100).toFixed(1)}% que mas gasta en Uber. `
         } else {
           percentileMessage += `...🤯  Creo que te salía más barato viajar en 🚐 o 🛩. Estás sobre el ${(uber*100).toFixed(1)}% que mas gasta en Uber. `
         }
       }
-
-      const fintualMessage = `\nEl total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 💸  Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
-      return `${percentileMessage} \n ${fintualMessage}`
+      return percentileMessage;
     },
 
     deliveryExpenses() {
@@ -412,6 +429,10 @@ export default {
   },
   methods: {
     finishLastDialog(){
+      this.showPercentile = true;
+    },
+
+    showFintualChange() {
       this.showFintual = true;
     },
 
