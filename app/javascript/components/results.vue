@@ -8,7 +8,7 @@
           :backSpeed="40"
           :typeSpeed="35"
           :smartBackspace="true"
-          :strings="['Ya terminamos de procesar tus gastos. Veamos cómo estuvo el 2020.']"
+          :strings="['Ya terminamos de procesar tus gastos. 🤖  Veamos cómo estuvo el 2020. 🧐']"
         >
           <h2 class="typing inline font-mono"></h2>
         </vue-typed-js>
@@ -67,7 +67,7 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="['Este año no gastaste mucho en delivery. No debes tener mucha plata.', `Este año no gastaste mucho en delivery. Eres un buen administrador. Estimo que pides delivery 1-2 veces por semana. ${finalMessage}`]"
+            :strings="['Este año no gastaste mucho en delivery. No debes tener mucha plata. 😅', `Este año no gastaste mucho en delivery. Eres un buen administrador 🤭. Estimo que pides delivery 1-2 veces por semana. 💸 ${finalMessage}`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -81,7 +81,7 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="[`Te guuuuusta el delivery ah! Bueno no te culpo, pandemia y todo eso. Estimo que pides delivery 3-4 veces por semana. ${finalMessage}`]"
+            :strings="[`Te guuuuusta el delivery ah! 🐽 Bueno no te culpo, pandemia y todo eso 🦠. Estimo que pides delivery 3-4 veces por semana 😅. ${finalMessage}`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -95,7 +95,7 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="['Este año no gastaste muuuucho en Delivery.', `Este año gastaste muuuuuuuuuuuuuuucho en Delivery. Demasiado. Se te pasó la mano. Deberias considerar tomar clases de cocina. Tus números me dicen que pides delivery 4 veces por semana. ${finalMessage}`]"
+            :strings="['Este año no gastaste muuuucho en Delivery. 😃', `Este año gastaste muuuuuuuuuuuuuuucho en Delivery.😆 Demasiado. Estás bien? Se te pasó la mano. Deberias considerar tomar clases de cocina. Tus números me dicen que pides delivery 4 veces por semana. 💸 ${finalMessage}`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -109,7 +109,7 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="['No, estos números no me cuadran debe haber un problema. Es imposible lo que veo.', `Acabo de revisar y el problema eres tú. Soy un robot solamente, pero deberías pedir ayuda. Pides Delivery casi todos los días. ${finalMessage}`]"
+            :strings="['No, estos números no me cuadran debe haber un problema 😐. Es imposible lo que veo.', `Acabo de revisar y el problema eres tú. Soy un robot solamente 🤖, pero deberías pedir ayuda. Pides Delivery casi todos los días. 💸 ${finalMessage}`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -249,11 +249,11 @@ export default {
     },
 
     isMediumExpenseExperience() {
-      return this.deliveryExpenses > 650000 && this.deliveryExpenses < 1300000;
+      return this.deliveryExpenses >= 650000 && this.deliveryExpenses < 1300000;
     },
 
     isBigExpenseExperience() {
-      return this.deliveryExpenses > 1300000 && this.deliveryExpenses < 2600000;
+      return this.deliveryExpenses >= 1300000 && this.deliveryExpenses < 2600000;
     },
 
     isCrazyExpenseExperience() {
@@ -262,32 +262,40 @@ export default {
 
     cityTripsMessage1() {
       if (this.uber == 0) {
-        return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste.'
+        return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste. 🤨'
       } else {
-        return 'También fuiste a muchas fiestas clandestinas.'
+        return 'También fuiste a muchas fiestas clandestinas. 🤫'
       }
     },
 
     cityTripsMessage2() {
       if (this.uber == 0) {
-        return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste.'
+        return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste. 🤨'
+      } else if (this.uber < 250000) {
+        return `Nuestra I.A. nos dice que gastaste ${this.uber} CLP en Uber 👀. A donde viajabas tanto en pandemia? 😏`
       } else {
-        return `También te moviste por la ciudad. Gastaste $${this.uber.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP en Uber.`
+        let extendMessage = 'A comprar comida supongo 👀 por que no pediste mucho a la casa.';
+        if (this.rappi > 50000 || this.uber_eats > 50000) {
+          extendMessage = '...Si ya sabemos que comida no te falto 🤭';
+        }
+        return `... 😐 Tú si que te moviste por la ciudad. 🚗 Gastaste $${this.uber.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP en Uber. 💸  A donde viajabas tanto? ${extendMessage}`
       }
     },
 
     rappiOverUberText() {
       if (this.rappi > this.uber_eats) {
-        return `Vamos por partes. Te gusta más Rappi que UberEats. De hecho te gusta ${(this.rappi / this.uber_eats).toFixed(1)} veces más.`
+        return `Vamos por partes. Nuestra I.A. nos dice que te gusta más Rappi que UberEats. De hecho te gusta ${(this.rappi / this.uber_eats).toFixed(1)} veces más. Que tienes con Rappi? 🤨   Estás bien? No necesitas ayuda?`
       } else if (this.rappi < this.uber_eats) {
-        return `Vamos por partes. Prefieres UberEats sobre Rappi. De hecho lo prefieres ${(this.uber_eats / this.rappi).toFixed(1)} veces más.`
+        return `Vamos por partes. Nuestra I.A. nos dice que prefieres UberEats sobre Rappi. De hecho lo prefieres ${(this.uber_eats / this.rappi).toFixed(1)} veces más. Que tienes con Uber? 🤨   Estás bien? No necesitas ayuda?`
+      } else if (this.rappi === 0 && this.uber_eats === 0) {
+        `Vamos por partes. Nuestra super I.A nos dice que... no tienes mucha plata?         No no... perdon, me equivoque de cuenta. Simplemente eres bueno ahorrando 😜`
       } else {
-        return 'Vamos por partes. Te gusta Rappi y UberEats por igual. Curioso.';
+        return 'Vamos por partes. Nuestra I.A. nos dice que te gusta Rappi y UberEats ...por igual? 😱 ...Esto significa que eres igual de malo ahorrando en ambas plataformas 🤭 Bueno, sigamos.';
       }
     },
 
     finalMessage() {
-      return `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP, en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP.`
+      return `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP 💸, en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
     },
 
     deliveryExpenses() {
@@ -295,6 +303,7 @@ export default {
       this.rappi = -rappi;
       this.uber_eats = -uber_eats;
       this.uber = -uber;
+      console.log(-rappi + -uber_eats + -uber)
       return -rappi + -uber_eats + -uber;
     },
 
@@ -320,7 +329,7 @@ export default {
       this.showExperience = true;
     },
 
-    toggleShowPressKit() {
+    toggleShowPressKit(){
       this.showPressKit = !this.showPressKit;
 
       if (this.showPressKit) window.analytics.track('Press Kit Viewed');
