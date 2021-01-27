@@ -12,7 +12,7 @@
         </h1>
 
         <h1 class="mt-6 text-xl text-center text-gray-800 font-mono leading-relaxed">
-          Nuestra I.A calculará tus gastos anuales en comida delivery
+          Nuestra I.A. calculará tus gastos anuales en comida delivery
         </h1>
 
         <button
@@ -45,7 +45,7 @@
           :backSpeed="40"
           :typeSpeed="30"
           :smartBackspace="true"
-          :strings="['Hola! Soy X AE A-XII, una I.A entrenada para detectar cuanto gastas por año en delivery (Rappi y Uber Eats).']"
+          :strings="['Hola! Soy X AE A-XII, una I.A. entrenada para detectar cuanto gastas por año en delivery (Rappi y Uber Eats).']"
         >
           <h2 class="typing font-mono"></h2>
         </vue-typed-js>
