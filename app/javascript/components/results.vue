@@ -96,7 +96,7 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="[`De verdad te guuuuusta el delivery ah! 🐽 Bueno no te culpo, pandemia y todo eso. 🦠 Estimo que pides delivery 3-4 veces por semana. 😅`]"
+            :strings="[`De verdad te guuuuusta el delivery ah! 🐽 Bueno no te culpo, pandemia y todo eso. 🤭 Estimo que pides delivery 3-4 veces por semana. 😅`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
