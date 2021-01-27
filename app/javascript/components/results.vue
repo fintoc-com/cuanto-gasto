@@ -110,7 +110,7 @@
             :backSpeed="40"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="['Este año no gastaste muuuucho en Delivery. 😃', `Este año gastaste muuuuuuuuuuuuuuucho en Delivery.😆 Demasiado. Estás bien? Se te pasó la mano. Deberias considerar tomar clases de cocina. Tus números me dicen que pides delivery 4 veces por semana.`]"
+            :strings="['Este año no gastaste mucho en Delivery. 😃', `Este año gastaste muuuuuuuuuuuuchisimo en Delivery. 😆 Demasiado. Estás bien? Se te pasó la mano. Deberias considerar tomar clases de cocina. Tus números me dicen que pides delivery 4 veces por semana.`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -320,16 +320,75 @@ export default {
 
     rappiOverUberText() {
       if (this.rappi > this.uber_eats) {
-        return `Veamos... Mi cerebro artificial 🤖 dice que te gusta más Rappi que UberEats. De hecho te gusta ${(this.rappi / this.uber_eats).toFixed(1)} veces más. Que tienes con Rappi? 🤨  Estás bien?`
+        const value = this.uber_eats !== 0 ? (this.rappi / this.uber_eats).toFixed(1) : 'infinitas';
+        return `Veamos... Mi cerebro artificial 🤖 dice que te gusta más Rappi que UberEats. De hecho te gusta ${value} veces más. Que tienes con Rappi? 🤨  Estás bien?`
       } else if (this.rappi < this.uber_eats) {
-        return `Veamos... Mi cerebro artificial 🤖 dice que prefieres UberEats sobre Rappi. De hecho lo prefieres ${(this.uber_eats / this.rappi).toFixed(1)} veces más. Que tienes con Uber? 🤨  Estás bien?`
+        const value = this.rappi !== 0 ? (this.uber_eats / this.rappi).toFixed(1) : 'infinitas';
+        return `Veamos... Mi cerebro artificial 🤖 dice que prefieres UberEats sobre Rappi. De hecho lo prefieres ${value} veces más. Que tienes con UberEats? 🤨  Estás bien?`
       } else {
         return 'Veamos... Mi cerebro artificial 🤖  dice que te gusta Rappi y UberEats ...por igual? 😱 ...Esto significa que eres igual de malo ahorrando en ambas plataformas 🤭 Bueno, sigamos.';
       }
     },
 
     finalMessage() {
-      return `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 💸  Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
+      let percentileMessage = '';
+      const { rappi, uber, uber_eats} = this.percentile;
+      // const { rappi, uber, uber_eats} = { rappi: 0.51, uber: 0.9, uber_eats: 0.1};
+      if (this.rappi > 0) {
+        if (rappi < 0.1) {
+          percentileMessage += `Estás en el ${rappi*100}% que menos gasta en Rappi.`
+        } else if (rappi < 0.5) {
+          percentileMessage += `Estás en el ${rappi*100}% que menos gasta en Rappi.`
+        } else if (rappi < 0.85) {
+          percentileMessage += `Estás sobre el ${rappi*100}% que mas gasta en Rappi.`
+        } else {
+          percentileMessage += `Estás sobre el ${rappi*100}% que mas gasta en Rappi.`
+        }
+      }
+
+      if (this.uber_eats > 0) {
+        if (uber_eats < 0.1) {
+          percentileMessage += `Estás en el ${uber_eats*100}% que menos gasta en UberEats.`
+        } else if (rappi < 0.5) {
+          percentileMessage += `Estás en el ${uber_eats*100}% que menos gasta en UberEats.`
+        } else if (uber < 0.85) {
+          percentileMessage += `Estás sobre el ${uber_eats*100}% que mas gasta en UberEats.`
+        } else {
+          percentileMessage += `Estás sobre el ${uber_eats*100}% que mas gasta en UberEats.`
+        }
+      }
+
+      if ((this.rappi === 0 && this.uber_eats === 0) || (rappi < 0.1 && uber_eats < 0.1)) {
+        percentileMessage +=  'Eres bueno ahorrando! 🥳'
+      } else {
+        if (this.rappi > 0 || this.uber_eats > 0) {
+          if (rappi <= 0.1 && uber_eats <= 0.1) {
+            percentileMessage +=  'Eres bueno ahorrando! 🥳'
+          } else if ((rappi > 0.1 && rappi <= 0.5) || (uber_eats > 0.1 && uber_eats <= 0.5)) {
+            percentileMessage +=  'Podrías aprender a cocinar y ahorrarias bastante. 👩‍🍳🧑‍🍳'
+          } else if ((rappi > 0.5 && rappi <= 0.85) || (uber_eats > 0.5 && uber_eats <= 0.85)) {
+            percentileMessage +=  '😧 Podrias hasta pagarte clases de cocina.'
+          } else {
+            percentileMessage += '... 🤯  Cada vez que me salga que Rappi o UberEats estan con mucha demanda, te voy a echar la culpa. 😖'
+          }
+        }
+      }
+
+      if (this.uber > 0) {
+        percentileMessage += 'También encontre que'
+        if (uber < 0.1) {
+          percentileMessage += ` con suerte usar uber. 🚙 Estás en el ${uber*100}% que menos gasta en Uber.`
+        } else if (rappi < 0.5) {
+          percentileMessage += ` estás en el ${uber*100}% que menos gasta en Uber. 🚗 A donde viajabas tanto en pandemia? 🤨`
+        } else if (uber < 0.85) {
+          percentileMessage += `... omitire comentarios. 🚗  Estás sobre el ${uber*100}% que mas gasta en Uber. `
+        } else {
+          percentileMessage += `...🤯  Creo que te salía más barato viajar en 🚐 o 🛩. Estás sobre el ${uber*100}% que mas gasta en Uber. `
+        } d
+      }
+
+      const fintualMessage = `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 💸  Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
+      return `${percentileMessage}. \n ${fintualMessage}`
     },
 
     deliveryExpenses() {
@@ -345,6 +404,10 @@ export default {
       const { rappi, uber_eats, uber } = this.results.investment;
       // const { rappi, uber_eats, uber } = { rappi: 490000, uber_eats: 550000, uber: 250000 };
       return rappi + uber_eats + uber;
+    },
+
+    percentiles() {
+      return this.results.percentiles;
     }
   },
   methods: {

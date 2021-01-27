@@ -16,7 +16,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      currentStep: 'intro',
+      currentStep: 'results',
       session: '',
       widgetWebhookHost: WIDGET_WEBHOOK_HOST,
     }

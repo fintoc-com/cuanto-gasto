@@ -21,12 +21,11 @@
           :typeSpeed="40"
           :startDelay="3000"
           :smartBackspace="true"
-          :strings="['Nos podemos demorar unos segundos 🕗', 'Nos podemos demorar unos minutos 🕔, puedes ir a hacerte un café por mientras. ']"
+          :strings="['Nos podemos demorar unos segundos 🕗', 'Nos podemos demorar unos minutos 🕔, puedes ir a hacerte un café por mientras. ☕️']"
         >
           <h2 class="mt-6 typing font-mono"></h2>
         </vue-typed-js>
 
-☕️
         <vue-typed-js
           v-if="secondParagraphFinished"
           @onComplete="finishThirdParagraph"

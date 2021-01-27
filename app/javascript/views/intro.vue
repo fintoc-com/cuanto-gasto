@@ -93,7 +93,7 @@
           :backSpeed="40"
           :typeSpeed="30"
           :smartBackspace="true"
-          :strings="['Mis creadores me construyeron cómo un ejemplo de las cosas que se pueden construir con Fintoc. Si tienes dudas con los datos, acá está la información.']"
+          :strings="['Mis creadores me construyeron cómo un ejemplo de las cosas que se pueden construir con Fintoc.']"
         >
           <h2 class="mt-6 typing font-mono"></h2>
         </vue-typed-js>
@@ -130,7 +130,7 @@
           :backSpeed="40"
           :typeSpeed="30"
           :smartBackspace="true"
-          :strings="['No puedo ver cuanto gastante en Delivery sin conectarme a tu banco.']"
+          :strings="['No puedo ver cuanto gastante en Delivery sin conectarme a tu banco. Conectar tu cuenta de banco usando Fintoc es seguro. Tus datos se mantienen privados y la conexión con el banco se encuentra encriptada.']"
         >
           <h2 class="mt-6 typing font-mono"></h2>
         </vue-typed-js>
