@@ -122,8 +122,7 @@
           class="mt-4 group self-end relative py-2 px-4 border font-mono
                 border-transparent text-sm rounded-2xl
                 text-white fintoc-blue focus:outline-none transition duration-150
-                ease-in-out focus:opacity-50 hover:opacity-50 shadow-2xl"
-          :class="{ 'opacity-50': showWhyDialog }">
+                ease-in-out focus:opacity-50 hover:opacity-50 shadow-2xl">
           Resumen de tus gastos
         </button>        
       </div>
@@ -296,7 +295,7 @@ export default {
       this.rappi = -rappi;
       this.uber_eats = -uber_eats;
       this.uber = -uber;
-      return rappi + uber_eats + uber;
+      return -rappi + -uber_eats + -uber;
     },
 
     savings() {
