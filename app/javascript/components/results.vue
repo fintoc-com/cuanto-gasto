@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="container max-w-xl mx-auto flex flex-col items-center justify-center my-6" v-show="!showPressKit">
-      <div class="mt-4 sm:mt-12 w-full flex flex-col" v-if="!finished">
+      <div class="py-2 space-y-2m:mt-12 w-full flex flex-col px-2" v-if="!finished">
         <vue-typed-js
           @onComplete="changeToShowExperience"
           :showCursor="false"
-          :backSpeed="40"
+          :backSpeed="45"
           :typeSpeed="35"
           :smartBackspace="true"
           :strings="['Ya terminamos de procesar tus gastos. Veamos cómo estuvo el 2020. 🧐']"
@@ -20,7 +20,7 @@
               :showCursor="false"
               :startDelay="2000"
               :backDelay="1000"
-              :backSpeed="40"
+              :backSpeed="45"
               :typeSpeed="35"
               :smartBackspace="true"
               :strings="['Este año gastaste muuuucho.', 'Broma, en realidad no gastaste NADA. No tengo mucho más que aportar acá.']"
@@ -35,7 +35,7 @@
               :showCursor="false"
               :startDelay="2000"
               :backDelay="1000"
-              :backSpeed="40"
+              :backSpeed="45"
               :typeSpeed="35"
               :smartBackspace="true"
               :strings="[rappiOverUberText]"
@@ -49,7 +49,7 @@
               :showCursor="false"
               :startDelay="2000"
               :backDelay="1000"
-              :backSpeed="40"
+              :backSpeed="45"
               :typeSpeed="35"
               :smartBackspace="true"
               :strings="[cityTripsMessage1, cityTripsMessage2]"
@@ -65,7 +65,7 @@
             @onComplete="goToEnding"
             :startDelay="2000"
             :backDelay="1000"
-            :backSpeed="40"
+            :backSpeed="45"
             :typeSpeed="35"
             :smartBackspace="true"
             :strings="['Entonces... que aprendimos hoy 🔍']"
@@ -79,7 +79,7 @@
             @onComplete="finishLastDialog"
             :startDelay="2000"
             :backDelay="1000"
-            :backSpeed="40"
+            :backSpeed="45"
             :typeSpeed="35"
             :smartBackspace="true"
             :strings="['Este año no gastaste mucho en delivery. No debes tener mucha plata. 😅', `Este año no gastaste mucho en delivery. Eres un buen administrador. 🤭 Estimo que pides delivery 1-2 veces por semana. 💸 `]"
@@ -93,7 +93,7 @@
             @onComplete="finishLastDialog"
             :startDelay="2000"
             :backDelay="1000"
-            :backSpeed="40"
+            :backSpeed="45"
             :typeSpeed="35"
             :smartBackspace="true"
             :strings="[`De verdad te guuuuusta el delivery ah! 🐽 Bueno no te culpo, pandemia y todo eso. 🤭 Estimo que pides delivery 3-4 veces por semana. 😅`]"
@@ -107,10 +107,10 @@
             @onComplete="finishLastDialog"
             :startDelay="2000"
             :backDelay="1000"
-            :backSpeed="40"
+            :backSpeed="45"
             :typeSpeed="35"
             :smartBackspace="true"
-            :strings="['Este año no gastaste mucho en Delivery. 😃', `Este año gastaste muuuuuuuuuuuuchisimo en Delivery. 😆 Demasiado. Estás bien? Se te pasó la mano. Deberias considerar tomar clases de cocina. Tus números me dicen que pides delivery 4 veces por semana.`]"
+            :strings="['Este año no gastaste mucho en Delivery. 😃', `Este año gastaste muuuuuuuuuuuuchisimo en Delivery. 😆 Demasiado. Estás bien? Se te pasó la mano. 🤭 Estimo que pides delivery 4 veces por semana.`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -121,7 +121,7 @@
             @onComplete="finishLastDialog"
             :startDelay="2000"
             :backDelay="1000"
-            :backSpeed="40"
+            :backSpeed="45"
             :typeSpeed="35"
             :smartBackspace="true"
             :strings="['No, estos números no me cuadran debe haber un problema 😐. Es imposible lo que veo.', `Acabo de revisar y el problema eres tú. Soy un robot solamente 🤖, pero deberías pedir ayuda. Pides Delivery casi todos los días.`]"
@@ -135,7 +135,7 @@
             @onComplete="showFintualChange"
             :startDelay="2000"
             :backDelay="1000"
-            :backSpeed="40"
+            :backSpeed="45"
             :typeSpeed="35"
             :smartBackspace="true"
             :strings="[`${percentileSummaryMessage}`]"
@@ -149,7 +149,7 @@
             @onComplete="showButton"
             :startDelay="2000"
             :backDelay="1000"
-            :backSpeed="40"
+            :backSpeed="45"
             :typeSpeed="35"
             :smartBackspace="true"
             :strings="[`${finalMessage}`]"
@@ -162,7 +162,7 @@
           v-show="showSummaryButton"
           @click="finishDialog"
           type="submit"
-          class="mt-4 group self-end relative py-2 px-4 border font-mono
+          class="mt-4 mb-6 mx-4 group self-end relative py-2 px-4 border font-mono
                 border-transparent text-sm rounded-2xl
                 text-white fintoc-blue focus:outline-none transition duration-150
                 ease-in-out focus:opacity-50 hover:opacity-50 shadow-2xl">
@@ -312,7 +312,7 @@ export default {
       } else if (this.uber < 250000) {
         return 'Que? Pero que veo acá, en serio? 👀  Al parecer también fuiste a muchas fiestas clandestinas. 🤫'
       } else {
-        return '... 😐  En serio? Gastaste todo esto en Uber?'
+        return '😐  En serio? Gastaste todo esto en Uber?'
       }
     },
 
@@ -327,9 +327,9 @@ export default {
         if (this.rappi > 50000 || this.uber_eats > 50000) {
           extendMessage = '...Si ya sabemos que comida no te falto 🤭';
         }
-        return `... 😐  En serio? Gastaste todo esto en Uber? Tú si que te moviste por la ciudad. 🚗 Gastaste $${uberText} CLP en Uber. 💸  A donde viajabas tanto? ${extendMessage}`
+        return `😐  En serio? Gastaste todo esto en Uber? Tú si que te moviste por la ciudad. 🚗 Gastaste $${uberText} CLP en Uber. 💸  A donde viajabas tanto? ${extendMessage}`
       } else {
-        return `... Creo que estoy funcionando mal. 😐 Puedes avisarle a mis creadores? Por que no encuentro explicacion a esto. Viajaste a Argentina o que, como gastaste $${uberText} CLP en Uber 🤯`
+        return `Creo que estoy funcionando mal. 😐 Puedes avisarle a mis creadores? Por que no encuentro explicacion a esto. Viajaste a Argentina o que, como gastaste $${uberText} CLP en Uber 🤯`
       }
     },
 
@@ -429,26 +429,32 @@ export default {
   },
   methods: {
     finishLastDialog(){
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
       this.showPercentile = true;
     },
 
     showFintualChange() {
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
       this.showFintual = true;
     },
 
     showButton() {
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
       this.showSummaryButton = true
     },
 
     finishCityTrips(){
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
       this.showBeforeEnding = true;
     },
 
     goToEnding() {
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
       this.cityTripsFinished = true;
     },
 
     finishRappiOverUber() {
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
       this.rappiOverUberFinished = true;
     },
 
@@ -463,6 +469,7 @@ export default {
     },
 
     finishDialog() {
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
       this.finished = true;
     },
   },

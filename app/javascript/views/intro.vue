@@ -130,7 +130,7 @@
           :backSpeed="40"
           :typeSpeed="30"
           :smartBackspace="true"
-          :strings="['No puedo ver cuanto gastante en Delivery sin conectarme a tu banco. Conectar tu cuenta de banco usando Fintoc es seguro. Tus datos se mantienen privados y la conexión con el banco se encuentra encriptada.']"
+          :strings="['No puedo ver cuanto gastaste en Delivery sin conectarme a tu banco. Conectar tu cuenta de banco usando Fintoc es seguro. Tus datos se mantienen privados y la conexión con el banco se encuentra encriptada.']"
         >
           <h2 class="mt-6 typing font-mono"></h2>
         </vue-typed-js>
