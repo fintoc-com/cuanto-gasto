@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Primary Meta Tags -->
+    <title>CuantoGasto</title>
+    <meta name="title" content="CuantoGasto">
+    <meta name="description" content="Revisa cuanto gastaste en comida (Rappi y Uber Eats) el 2020.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cuantogasto.cl">
+    <meta property="og:title" content="CuantoGasto">
+    <meta property="og:description" content="Revisa cuanto gastaste en comida (Rappi y Uber Eats) el 2020.">
+    <meta property="og:image" content="https://d651wjhrjhvon.cloudfront.net/dicaprio.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://cuantogasto.cl">
+    <meta property="twitter:title" content="CuantoGasto">
+    <meta property="twitter:description" content="Revisa cuanto gastaste en comida (Rappi y Uber Eats) el 2020.">
+    <meta property="twitter:image" content="https://d651wjhrjhvon.cloudfront.net/dicaprio.jpg">
+
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= stylesheet_pack_tag 'application' %>
+    <script>
+      const RAILS_API_URL = "<%= ENV.fetch('RAILS_API_URL') %>";
+      const WIDGET_WEBHOOK_HOST = "<%= ENV.fetch('WIDGET_WEBHOOK_HOST') %>";
+    </script>
+
+  <script>
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.13.1";
+    analytics.load("0FvCJ6ewXVM3catKbzcHCYZxTBuD6u4G");
+    analytics.page();
+    }}();
+  </script>
+  </head>
+
+  <body>
+    <div id="vue-app">
+      <app></app>
+      <%= yield %>
+    </div>
+  </body>
+</html>
