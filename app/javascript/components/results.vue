@@ -8,7 +8,7 @@
           :backSpeed="35"
           :typeSpeed="20"
           :smartBackspace="true"
-          :strings="['Ya terminamos de procesar tus gastos. Veamos cómo estuvo el 2020. 🧐']"
+          :strings="['Terminamos de procesar tus gastos. Veamos cómo estuvo el 2020 🧐.']"
         >
           <h2 class="typing inline font-mono"></h2>
         </vue-typed-js>
@@ -23,7 +23,7 @@
               :backSpeed="35"
               :typeSpeed="20"
               :smartBackspace="true"
-              :strings="['Este año gastaste muuuucho.', 'Broma, en realidad no gastaste NADA. No tengo mucho más que aportar acá.']"
+              :strings="['Este año gastaste muuuucho.', 'Broma, en verdad no compraste NADA. Nada más que decir acá.']"
             >
               <h2 class="mt-6 typing inline font-mono"></h2>
             </vue-typed-js>
@@ -68,7 +68,7 @@
             :backSpeed="35"
             :typeSpeed="20"
             :smartBackspace="true"
-            :strings="['Entonces... que aprendimos hoy 🔍']"
+            :strings="['Entonces... qué aprendimos hoy 🔍']"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -82,7 +82,7 @@
             :backSpeed="35"
             :typeSpeed="20"
             :smartBackspace="true"
-            :strings="['Este año no gastaste mucho en delivery. No debes tener mucha plata. 😅', `Este año no gastaste mucho en delivery. Eres un buen administrador. 🤭 Estimo que pides delivery 1-2 veces por semana. 💸 `]"
+            :strings="['Este año no gastaste mucho en delivery. No debes tener mucha plata 😅.', `Este año no gastaste mucho en delivery. Eres un buen administrador 🤭. Creo que pides delivery 1-2 veces por semana 💸.`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -96,9 +96,9 @@
             :backSpeed="35"
             :typeSpeed="20"
             :smartBackspace="true"
-            :strings="[`De verdad te guuuuusta el delivery ah! 🐽 Bueno no te culpo, pandemia y todo eso. 🤭 Estimo que pides delivery 3-4 veces por semana. 😅`]"
+            :strings="[`Eres bien malo para cocinarte ah! Bueno no te culpo, la pandemia... 🤭. Creo que pides delivery 3-4 veces por semana 😅.`]"
           >
-            <h2 class="mt-6 typing inline font-mono"></h2>
+            <h2 class="mt-6 typing inline font-mono"></h2> 
           </vue-typed-js>
 
           <vue-typed-js
@@ -110,7 +110,7 @@
             :backSpeed="35"
             :typeSpeed="20"
             :smartBackspace="true"
-            :strings="['Este año no gastaste mucho en Delivery. 😃', `Este año gastaste muuuuuuuuuuuuchisimo en Delivery. 😆 Demasiado. Estás bien? Se te pasó la mano. 🤭 Estimo que pides delivery 4 veces por semana.`]"
+            :strings="['Este año no gastaste mucho en Delivery 😃.', `Jaja te gustaría. Este año se te fue muuuuuuuuuuuuchísimo en Delivery. Se te pasó la mano 🤭. Pides delivery fácil 4 veces por semana.`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -124,7 +124,7 @@
             :backSpeed="35"
             :typeSpeed="20"
             :smartBackspace="true"
-            :strings="['No, estos números no me cuadran debe haber un problema 😐. Es imposible lo que veo.', `Acabo de revisar y el problema eres tú. Soy un robot solamente 🤖, pero deberías pedir ayuda. Pides Delivery casi todos los días.`]"
+            :strings="['Está raro esto. Debe haber un problema 😐. Esperame un poco...', `Acabo de revisar y... deberías pedir ayuda. Pides Delivery casi todos los días.`]"
           >
             <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
@@ -242,6 +242,7 @@
 
         <p class="mt-10">
           <span class="font-bold">Objetivo:</span>
+          Explicar fintoc es difícil. Descubrimos que lo más fácil es mostrar ejemplos de las cosas que se pueden hacer con la herramienta. <a href="https://blog.fintoc.com/por-que-creamos-cuanto-gasto/" target="_blank">Acá</a> una explicación más detallada.
         </p>
 
         <p class="mt-10">
@@ -253,7 +254,7 @@
         </p>
 
         <p class="mt-10">
-          <span class="font-bold">¿Quienes están detrás de Fintoc?:</span>4 Ingenieros en Computación -Software Engineers-. <a class="underline">Cristóbal Griffero</a> y <a class="underline">Lukas Zorich</a> como fundadores/devs. <a class="underline">Juan Pablo Jofré</a> y <a class="underline">Nicolás Teare</a> como devs. 3/4 están en el ranking de los <a href="https://commits.top/chile_private.html" class="underline">programadores más activos de Chile</a>.
+          <span class="font-bold">¿Quienes están detrás de Fintoc?:</span>4 Ingenieros en Computación -Software Engineers-. <a href="https://www.linkedin.com/in/griffero/" class="underline">Cristóbal Griffero</a> y <a href="https://www.linkedin.com/in/lezorich/" class="underline">Lukas Zorich</a> como fundadores/devs. <a class="underline" href="https://www.linkedin.com/in/juan-pablo-jofr%C3%A9-56bbb5b4/">Juan Pablo Jofré</a> y <a class="underline" href="https://www.linkedin.com/in/nateare/">Nicolás Teare</a> como devs. 3/4 están en el ranking de los <a href="https://commits.top/chile_private.html" class="underline">programadores más activos de Chile</a>.
         </p>
 
         <p class="mt-10">
@@ -308,45 +309,45 @@ export default {
 
     cityTripsMessage1() {
       if (this.uber == 0) {
-        return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste. 🤨'
+        return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste 🐀.'
       } else if (this.uber < 250000) {
-        return 'Que? Pero que veo acá, en serio? 👀  Al parecer también fuiste a muchas fiestas clandestinas. 🤫'
+        return 'Fuiste a varias fiestas clandestinas 🤫.'
       } else {
-        return '😐  En serio? Gastaste todo esto en Uber?'
+        return 'Really? Gastaste todo esto en Uber?'
       }
     },
 
     cityTripsMessage2() {
       const uberText = this.uber.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
       if (this.uber == 0) {
-        return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste. 🤨'
+        return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste 🐀.'
       } else if (this.uber < 250000) {
-        return `Que? Pero que veo acá, en serio? 👀  Al parecer viajabas harto en pandemia. 🚗 Gastaste $${uberText} CLP en Uber.`
+        return `Viajaste harto en pandemia. Gastaste $${uberText} CLP en Uber 🚗.`
       } else if (this.uber < 500000) {
-        let extendMessage = 'A comprar comida supongo 👀 por que no pediste mucho a la casa.';
+        let extendMessage = 'Ah, a comprar comida supongo por que no pediste mucho a la casa 👀.';
         if (this.rappi > 50000 || this.uber_eats > 50000) {
-          extendMessage = '...Si ya sabemos que comida no te falto 🤭';
+          extendMessage = '...Si ya sabemos que comida no te falto 🤭.';
         }
-        return `😐  En serio? Gastaste todo esto en Uber? Tú si que te moviste por la ciudad. 🚗 Gastaste $${uberText} CLP en Uber. 💸  A donde viajabas tanto? ${extendMessage}`
+        return `Really? Gastaste todo esto en Uber? Se te fueron $${uberText} CLP en Uber 🚗. 💸  ¿por qué tanto? ${extendMessage}`
       } else {
-        return `Creo que estoy funcionando mal. 😐 Puedes avisarle a mis creadores? Por que no encuentro explicacion a esto. Viajaste a Argentina o que, como gastaste $${uberText} CLP en Uber 🤯`
+        return `¿Cómo gastaste $${uberText} CLP en Uber 🤯.`
       }
     },
 
     rappiOverUberText() {
       if (this.rappi > this.uber_eats) {
         const value = this.uber_eats !== 0 ? (this.rappi / this.uber_eats).toFixed(1) : 'infinitas';
-        return `Veamos... Mi cerebro artificial 🤖 dice que te gusta más Rappi que UberEats. De hecho te gusta ${value} veces más. Que tienes con Rappi? 🤨  Estás bien?`
+        return `Veamos... Mi cerebro artificial 🤖 dice que te gusta más Rappi que UberEats. De hecho te gusta ${value} veces más.`
       } else if (this.rappi < this.uber_eats) {
         const value = this.rappi !== 0 ? (this.uber_eats / this.rappi).toFixed(1) : 'infinitas';
-        return `Veamos... Mi cerebro artificial 🤖 dice que prefieres UberEats sobre Rappi. De hecho lo prefieres ${value} veces más. Que tienes con UberEats? 🤨  Estás bien?`
+        return `Veamos... Mi cerebro artificial 🤖 dice que prefieres UberEats sobre Rappi. De hecho lo prefieres ${value} veces más.`
       } else {
         return 'Veamos... Mi cerebro artificial 🤖  dice que te gusta Rappi y UberEats ...por igual? 😱 ...Esto significa que eres igual de malo ahorrando en ambas plataformas 🤭 Bueno, sigamos.';
       }
     },
 
     finalMessage() {
-      return `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 💸  Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP. 📈`
+      return `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP 💸. Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP 📈.`
     },
 
     percentileSummaryMessage() {
@@ -359,9 +360,9 @@ export default {
         } else if (rappi < 0.5) {
           percentileMessage += `Estás en el ${(rappi*100).toFixed(1)}% que menos gasta en Rappi. `
         } else if (rappi < 0.85) {
-          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que mas gasta en Rappi. `
+          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que más gasta en Rappi. `
         } else {
-          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que mas gasta en Rappi. `
+          percentileMessage += `Estás sobre el ${(rappi*100).toFixed(1)}% que más gasta en Rappi. `
         }
       }
 
@@ -371,9 +372,9 @@ export default {
         } else if (rappi < 0.5) {
           percentileMessage += `Estás en el ${(uber_eats*100).toFixed(1)}% que menos gasta en UberEats. `
         } else if (uber < 0.85) {
-          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que mas gasta en UberEats. `
+          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que más gasta en UberEats. `
         } else {
-          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que mas gasta en UberEats. `
+          percentileMessage += `Estás sobre el ${(uber_eats*100).toFixed(1)}% que más gasta en UberEats. `
         }
       }
 
@@ -382,13 +383,13 @@ export default {
       } else {
         if (this.rappi > 0 || this.uber_eats > 0) {
           if (rappi <= 0.1 && uber_eats <= 0.1) {
-            percentileMessage +=  'Eres bueno ahorrando! 🥳 '
+            percentileMessage +=  'Eres güeeeno ahorrando! 🥳 '
           } else if ((rappi > 0.1 && rappi <= 0.5) || (uber_eats > 0.1 && uber_eats <= 0.5)) {
-            percentileMessage +=  'Podrías aprender a cocinar y ahorrarias bastante. 👩‍🍳🧑‍🍳 '
+            percentileMessage +=  'Podrías aprender a cocinar y ahorrarías harto 👩‍🍳🧑‍🍳.'
           } else if ((rappi > 0.5 && rappi <= 0.85) || (uber_eats > 0.5 && uber_eats <= 0.85)) {
-            percentileMessage +=  '😧 Podrias hasta pagarte clases de cocina. '
+            percentileMessage +=  'Podrías pagarte clases de cocina 😧 .'
           } else {
-            percentileMessage += '... 🤯  Cada vez que me salga que Rappi o UberEats estan con mucha demanda, te voy a echar la culpa. 😖 '
+            percentileMessage += '... Si se cae Rappi o UberEats es por tu culpa'
           }
         }
       }
@@ -396,13 +397,13 @@ export default {
       if (this.uber > 0) {
         percentileMessage += 'También encontre que'
         if (uber < 0.1) {
-          percentileMessage += ` con suerte usar uber. 🚙 Estás en el ${(uber*100).toFixed(1)}% que menos gasta en Uber.`
+          percentileMessage += ` casi no usas Uber 🚙. Estás en el ${(uber*100).toFixed(1)}% que menos gasta en Uber.`
         } else if (rappi < 0.5) {
-          percentileMessage += ` estás en el ${(uber*100).toFixed(1)}% que menos gasta en Uber. 🚗 A donde viajabas tanto en pandemia? 🤨`
+          percentileMessage += ` estás en el ${(uber*100).toFixed(1)}% que menos gasta en Uber.`
         } else if (uber < 0.85) {
-          percentileMessage += `... creo que omitire comentarios. 🚗  Estás sobre el ${(uber*100).toFixed(1)}% que mas gasta en Uber. `
+          percentileMessage += `... Estás sobre el ${(uber*100).toFixed(1)}% que mas gasta en Uber. `
         } else {
-          percentileMessage += `...🤯  Creo que te salía más barato viajar en 🚐 o 🛩. Estás sobre el ${(uber*100).toFixed(1)}% que mas gasta en Uber. `
+          percentileMessage += `...🤯  te sale más barato viajar en 🛩. Estás sobre el ${(uber*100).toFixed(1)}% que más gasta en Uber. `
         }
       }
       return percentileMessage;
@@ -410,7 +411,6 @@ export default {
 
     deliveryExpenses() {
       const { rappi, uber_eats, uber } = this.results.expenses;
-      // const { rappi, uber_eats, uber } = { rappi: -450000, uber_eats: -500000, uber: -750000 };
       this.rappi = -rappi;
       this.uber_eats = -uber_eats;
       this.uber = -uber;
@@ -419,7 +419,6 @@ export default {
 
     savings() {
       const { rappi, uber_eats, uber } = this.results.investment;
-      // const { rappi, uber_eats, uber } = { rappi: 490000, uber_eats: 550000, uber: 250000 };
       return rappi + uber_eats + uber;
     },
 

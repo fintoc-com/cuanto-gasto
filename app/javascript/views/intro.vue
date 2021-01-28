@@ -12,7 +12,7 @@
         </h1>
 
         <h1 class="mt-6 text-xl text-center text-gray-800 font-mono leading-relaxed">
-          Nuestra Inteligencia Artificial calculará tus gastos anuales en comida delivery
+          Nuestra Inteligencia Artificial calculará tus gastos anuales en comida delivery.
         </h1>
 
         <button
@@ -45,7 +45,7 @@
           :backSpeed="35"
           :typeSpeed="20"
           :smartBackspace="true"
-          :strings="['Hola! Soy Bender, una I.A entrenada para detectar cuanto gastas por año en delivery (Rappi y Uber Eats).']"
+          :strings="['Hola! Soy Bender, una I.A entrenada para detectar cuánto gastas por año en delivery (Rappi y Uber Eats).']"
         >
           <h2 class="typing font-mono"></h2>
         </vue-typed-js>
@@ -93,7 +93,8 @@
           :backSpeed="35"
           :typeSpeed="20"
           :smartBackspace="true"
-          :strings="['Mis creadores me construyeron cómo un ejemplo de las cosas que se pueden construir con Fintoc.']"
+          :contentType="'html'"
+          :strings="[whyText]"
         >
           <h2 class="mt-6 typing font-mono"></h2>
         </vue-typed-js>
@@ -173,6 +174,11 @@ export default {
   },
   props: ['session', 'widgetWebhookHost'],
   components: { widget, },
+  computed: {
+    whyText() {
+      return `<p>Soy un ejemplo de las cosas que se pueden armar sobre Fintoc. <a href='https://blog.fintoc.com/por-que-creamos-cuanto-gasto/' class='underline' target='_blank'>Acá</a> hay un post que explica esto mejor que yo.</p>`;
+    },
+  },
   methods: {
     finishNothanksDialog(){
       this.noThanksDialogFinished = true;
