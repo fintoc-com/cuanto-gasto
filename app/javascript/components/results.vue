@@ -215,7 +215,7 @@
           <a href="https://fintoc.com" target="_blank">
             <img
               class="mx-auto h-6 w-auto"
-              src="https://d651wjhrjhvon.cloudfront.net/fintoc-logo.svg"
+              src="https://d651wjhrjhvon.cloudfront.net/imagotipo.svg"
               alt="fintoc"
             >
           </a>

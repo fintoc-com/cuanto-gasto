@@ -31,7 +31,7 @@
           <a href="https://fintoc.com" target="_blank">
             <img
               class="mx-auto h-6 w-auto"
-              src="https://d651wjhrjhvon.cloudfront.net/fintoc-logo.svg"
+              src="https://d651wjhrjhvon.cloudfront.net/imagotipo.svg"
               alt="fintoc"
             >
           </a>
@@ -150,15 +150,11 @@
             Conectar cuenta
           </button>
       </div>
-
-      <widget v-if="showWidget" v-bind:widgetWebhookHost="widgetWebhookHost" v-bind:session="session" @close="closeWidget" @linkCreated="linkCreated"></widget>
     </div>
   </div>
 </template>
 
 <script>
-import widget from 'components/widget.vue';
-
 export default {
   data() {
     return {
@@ -170,10 +166,10 @@ export default {
       showWhyDialog: false,
       showNoThanksDialog: false,
       noThanksDialogFinished: false,
+      widget: null,
     };
   },
   props: ['session', 'widgetWebhookHost'],
-  components: { widget, },
   computed: {
     whyText() {
       return `<p>Soy un ejemplo de las cosas que se pueden armar sobre Fintoc. <a href='https://blog.fintoc.com/por-que-creamos-cuanto-gasto/' class='underline' target='_blank'>Acá</a> hay un post que explica esto mejor que yo.</p>. Si te preocupan tus datos, <a href='https://fintoc.com/legal/' class='underline' target='_blank'>acá</a> explicamos cómo los cuidamos.`;
@@ -197,17 +193,26 @@ export default {
     },
 
     closeIntro() {
-      window.analytics.track('Intro Dialog Viewed');
+      // window.analytics.track('Intro Dialog Viewed');
       this.showDialog = true;
+
+      this.widget = Fintoc.create({
+        holderType: 'individual',
+        product: 'movements',
+        webhookUrl: `${this.widgetWebhookHost}/api/v1/fintoc/${this.session}/webhook`,
+        publicKey: 'pk_live_1w-yzr_gcEZ-yez_HLT98oisSnc7j9GQ',
+        onSuccess: this.linkCreated,
+      })
     },
 
     openWidget() {
-      window.analytics.track('Widget Opened');
+      // window.analytics.track('Widget Opened');
       this.showWidget = true;
+      this.widget.open();
     },
 
     closeWidget() {
-      window.analytics.track('Widget Closed');
+      // window.analytics.track('Widget Closed');
       this.showWidget = false;
     },
 
@@ -229,7 +234,7 @@ export default {
     },
 
     linkCreated() {
-      window.analytics.track('Link Created');
+      // window.analytics.track('Link Created');
       this.$emit('goToLoading');
     },
   },

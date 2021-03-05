@@ -26,4 +26,5 @@ Rails.application.configure do
   config.assets.quiet = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.hosts << "fae4b0df1b71.ngrok.io"
+  config.hosts << /[a-z0-9]+\.ngrok\.io/
 end

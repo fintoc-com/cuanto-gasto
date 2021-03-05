@@ -36,20 +36,20 @@ export default {
   },
   components: { Intro, Loading, Results },
 
-  created() {
-    window.analytics.track('Intro Viewed');
-    this.fetchSession();
+  async mounted() {
+    // window.analytics.track('Intro Viewed');
+    await this.fetchSession();
   },
 
   methods: {
     setLoadingStep() {
-      window.analytics.track('Loading Results Viewed');
+      // window.analytics.track('Loading Results Viewed');
       this.currentStep = 'loading';
       this.pollForResults();
     },
 
     setResultStep() {
-      window.analytics.track('Results Viewed');
+      // window.analytics.track('Results Viewed');
       this.currentStep = 'results';
     },
 
