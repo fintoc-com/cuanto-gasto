@@ -200,7 +200,7 @@ export default {
         holderType: 'individual',
         product: 'movements',
         webhookUrl: `${this.widgetWebhookHost}/api/v1/fintoc/${this.session}/webhook`,
-        publicKey: 'pk_live_1w-yzr_gcEZ-yez_HLT98oisSnc7j9GQ',
+        publicKey: 'pk_test_NSx_XfEuRNn4xnA7MJ7DQQpje7cjghYA',
         onSuccess: this.linkCreated,
       })
     },
