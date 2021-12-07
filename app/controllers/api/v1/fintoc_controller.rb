@@ -44,34 +44,68 @@ class Api::V1::FintocController < Api::V1::BaseController
   end
 
   def calculate_expenses
-    rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
-                         .map(&:amount)
-                         .sum
-    uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
-                             .map(&:amount)
-                             .sum * 730 / 100
-                .to_i
-    uber = usd_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+    clp_rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
                         .map(&:amount)
-                        .sum * 730 / 100
-           .to_i
-    { rappi: rappi, uber_eats: uber_eats, uber: uber }
+                        .sum
+                        .to_i
+    usd_rappi = usd_movements.filter { |mov| /rappi/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum * 840 / 100
+                        .to_i
+    clp_uber_eats = clp_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum
+                        .to_i
+    usd_uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum * 840 / 100
+                        .to_i
+    clp_uber = clp_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum
+                        .to_i
+    usd_uber = usd_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum * 840 / 100
+                        .to_i
+    {
+      rappi: (clp_rappi + usd_rappi),
+      uber_eats: (clp_uber_eats + usd_uber_eats),
+      uber: (clp_uber + usd_uber)
+    }
   end
 
   def calculate_investment
-    rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
-                         .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
-                         .sum
-                         .to_i
-    uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
-                             .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
-                             .sum * 730 / 100
-                .to_i
-    uber = usd_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+    clp_rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
                         .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
-                        .sum * 730 / 100
+                        .sum
+                        .to_i
+    usd_rappi = usd_movements.filter { |mov| /rappi/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum * 840 / 100
+                        .to_i
+    clp_uber_eats = clp_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum
+                        .to_i
+    usd_uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum * 840 / 100
+                        .to_i
+    clp_uber = clp_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum
+                        .to_i
+    usd_uber = usd_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum * 840 / 100
+                        .to_i
            .to_i
-    { rappi: -1 * rappi, uber_eats: -1 * uber_eats, uber: -1 * uber }
+    {
+      rappi: -1 * (clp_rappi + usd_rappi),
+      uber_eats: -1 * (clp_uber_eats + usd_uber_eats),
+      uber: -1 * (clp_uber + usd_uber)
+    }
   end
 
   def clp_movements
