@@ -44,34 +44,67 @@ class Api::V1::FintocController < Api::V1::BaseController
   end
 
   def calculate_expenses
-    rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
-                         .map(&:amount)
-                         .sum
-    uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
-                             .map(&:amount)
-                             .sum * 730 / 100
-                .to_i
-    uber = usd_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+    clp_rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
                         .map(&:amount)
-                        .sum * 730 / 100
-           .to_i
-    { rappi: rappi, uber_eats: uber_eats, uber: uber }
+                        .sum
+                        .to_i
+    usd_rappi = usd_movements.filter { |mov| /rappi/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum * usd_to_clp / 100
+                        .to_i
+    clp_uber_eats = clp_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum
+                        .to_i
+    usd_uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum * usd_to_clp / 100
+                        .to_i
+    clp_uber = clp_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum
+                        .to_i
+    usd_uber = usd_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+                        .map(&:amount)
+                        .sum * usd_to_clp / 100
+                        .to_i
+    {
+      rappi: (clp_rappi + usd_rappi),
+      uber_eats: (clp_uber_eats + usd_uber_eats),
+      uber: (clp_uber + usd_uber)
+    }
   end
 
   def calculate_investment
-    rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
-                         .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
-                         .sum
-                         .to_i
-    uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
-                             .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
-                             .sum * 730 / 100
-                .to_i
-    uber = usd_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+    clp_rappi = clp_movements.filter { |mov| /rappi/i.match?(mov.description) }
                         .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
-                        .sum * 730 / 100
-           .to_i
-    { rappi: -1 * rappi, uber_eats: -1 * uber_eats, uber: -1 * uber }
+                        .sum
+                        .to_i
+    usd_rappi = usd_movements.filter { |mov| /rappi/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum * usd_to_clp / 100
+                        .to_i
+    clp_uber_eats = clp_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum
+                        .to_i
+    usd_uber_eats = usd_movements.filter { |mov| /uber.*eats/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum * usd_to_clp / 100
+                        .to_i
+    clp_uber = clp_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum
+                        .to_i
+    usd_uber = usd_movements.filter { |mov| /uber.*trip/i.match?(mov.description) }
+                        .map { |mov| mov.amount * fintual[mov.post_date.to_date.to_formatted_s] }
+                        .sum * usd_to_clp / 100
+                        .to_i
+    {
+      rappi: -1 * (clp_rappi + usd_rappi),
+      uber_eats: -1 * (clp_uber_eats + usd_uber_eats),
+      uber: -1 * (clp_uber + usd_uber)
+    }
   end
 
   def clp_movements
@@ -84,7 +117,7 @@ class Api::V1::FintocController < Api::V1::BaseController
 
   def movements(currency)
     @credit_cards.filter { |cc| cc.currency == currency }
-                 .map { |cc| cc.get_movements(since: '2020-01-01', until: '2020-12-31', per_page: 300).force }
+                 .map { |cc| cc.get_movements(since: '2021-01-01', until: '2021-12-31', per_page: 300).force }
                  .flatten
   end
 
@@ -115,10 +148,20 @@ class Api::V1::FintocController < Api::V1::BaseController
 
   def calculate_delivery(regex); end
 
+  def usd_to_clp
+    @usd_to_clp ||= begin
+      today = Time.now.strftime("%d-%m-%Y")
+      resp = HTTParty.get("https://mindicador.cl/api/dolar/#{today}")
+      resp['data']['serie'].first['valor'].to_i
+    rescue => exception
+      840
+    end
+  end
+
   def fintual
     @fintual ||= begin
       # moderate pit
-      resp = HTTParty.get("https://fintual.cl/api/real_assets/187/days?from_date=2020-01-01")
+      resp = HTTParty.get("https://fintual.cl/api/real_assets/187/days?from_date=2021-01-01")
       last_day = resp['data'].last['attributes']['price']
       arr = resp['data'].map do |x|
         { x['attributes']['date'] => (last_day / x['attributes']['price']) }
