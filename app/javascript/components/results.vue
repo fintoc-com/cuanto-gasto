@@ -175,7 +175,7 @@
           Te gastaste en delivery 💸
         </h1>
         <h2 class="text-2xl sm:mt-6 sm:text-5xl text-center text-red-500">
-          ${{ deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
+          ${{ formatMoney(deliveryExpenses) }} CLP
         </h2>
         <div class="flex flex-row justify-between">
           <div class="w-24 sm:w-56">
@@ -183,7 +183,7 @@
               Rappi
             </h1>
             <h2 class="mt-6 text-sm sm:text-lg text-center text-red-500">
-              ${{ rappi.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
+              ${{ formatMoney(rappi) }} CLP
             </h2>
           </div>
           <div class="w-24 sm:w-56">
@@ -191,7 +191,7 @@
               Uber Eats
             </h1>
             <h2 class="mt-6 text-sm sm:text-lg text-center text-red-500">
-              ${{ uber_eats.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
+              ${{ formatMoney(uber_eats) }} CLP
             </h2>
           </div>
           <div class="w-24 sm:w-56">
@@ -199,7 +199,7 @@
               Uber
             </h1>
             <h2 class="mt-6 text-sm sm:text-lg text-center text-red-500">
-              ${{ uber.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
+              ${{ formatMoney(uber) }} CLP
             </h2>
           </div>
         </div>
@@ -207,7 +207,7 @@
           Esa plata invertida en Fondos Mutuos hoy sería 📈
         </h1>
         <h2 class="mt-6 text-xl sm:text-3xl text-center text-green-500">
-          ${{ savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }} CLP
+          ${{ formatMoney(savings) }} CLP
         </h2>
 
         <div class="mt-12 text-center">
@@ -282,6 +282,7 @@ export default {
       rappi: 0,
       uber_eats: 0,
       uber: 0,
+      numberFormatter: new Intl.NumberFormat('es-CL'),
     };
   },
   props: ['results'],
@@ -318,7 +319,7 @@ export default {
     },
 
     cityTripsMessage2() {
-      const uberText = this.uber.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+      const uberText = this.formatMoney(this.uber);
       if (this.uber == 0) {
         return 'No te subiste a ningún Uber este año. O si lo hiciste no pagaste 🐀.'
       } else if (this.uber < 250000) {
@@ -347,7 +348,7 @@ export default {
     },
 
     finalMessage() {
-      return `El total que gastaste fue de $${this.deliveryExpenses.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP 💸. Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.savings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CLP 📈.`
+      return `El total que gastaste fue de $${this.formatMoney(this.deliveryExpenses)} CLP 💸. Si hubieses invertido esto en fondos mutuos hoy esta plata sumaría $${this.formatMoney(this.savings)} CLP 📈.`
     },
 
     percentileSummaryMessage() {
@@ -426,6 +427,9 @@ export default {
     }
   },
   methods: {
+    formatMoney(number) {
+      return this.numberFormatter.format(number.toFixed());
+    },
     finishLastDialog(){
       window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
       this.showPercentile = true;
