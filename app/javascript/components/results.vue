@@ -8,7 +8,7 @@
           :backSpeed="35"
           :typeSpeed="20"
           :smartBackspace="true"
-          :strings="['Terminamos de procesar tus gastos. Veamos cómo estuvo el 2020 🧐.']"
+          :strings="['Terminamos de procesar tus gastos. Veamos cómo estuvo el 2021 🧐.']"
         >
           <h2 class="typing inline font-mono"></h2>
         </vue-typed-js>
@@ -98,7 +98,7 @@
             :smartBackspace="true"
             :strings="[`Eres bien malo para cocinar! Creo que pides delivery 3-4 veces por semana 😅.`]"
           >
-            <h2 class="mt-6 typing inline font-mono"></h2> 
+            <h2 class="mt-6 typing inline font-mono"></h2>
           </vue-typed-js>
 
           <vue-typed-js
@@ -237,7 +237,7 @@
         <button class="cursor-pointer underline" @click="toggleShowPressKit"> Volver </button>
         <p class="mt-10">
           <span class="font-bold">Descripción:</span>
-          Cuánto gasto es un robot que usando la API de Fintoc, te muestra cuánto gastaste el 2020 en delivery. Lo hace viendo todas las transacciones bancarias a tu nombre de Rappi y Uber Eats.
+          Cuánto gasto es un robot que usando la API de Fintoc, te muestra cuánto gastaste el 2021 en delivery. Lo hace viendo todas las transacciones bancarias a tu nombre de Rappi y Uber Eats.
         </p>
 
         <p class="mt-10">
@@ -394,7 +394,7 @@ export default {
       }
 
       if (this.uber > 0) {
-        percentileMessage += 'También encontré que'
+        percentileMessage += '. También encontré que'
         if (uber < 0.1) {
           percentileMessage += ` casi no usas Uber 🚙. Estás en el ${(uber*100).toFixed(1)}% que menos gasta en Uber.`
         } else if (rappi < 0.5) {
